@@ -12,16 +12,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.print("Please enter your name:\t");
         String username = sc.next();
-        System.out.println("\n\nHello, and welcome " + username + " to my new Attendance App!");
+        System.out.println("\n\nHello, and welcome " + username + " to my new Attendance App!\n");
 
-        //create ArrayList to find absences and put random numbers in as elements
+        //create ArrayList to find absences and put random numbers in an elements
         Random rand = new Random();
-        int genrandom = rand.nextInt(11);
-        ArrayList attended = new ArrayList();
-        for (int i = 0; i < 10,i++){
+        ArrayList<Integer> attended = new ArrayList<>();
+        for (int i = 0; i < username.length(); i++) {
+            int genrandom = rand.nextInt(11);
             attended.add(genrandom);
-
         }
-        System.out.println("The elements are " + attended[])
+        System.out.println("The elements are " + attended);
     }
 }
