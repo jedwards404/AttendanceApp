@@ -34,7 +34,7 @@ public class Main {
     //Function to find perfect attendees
     private static int perfectAttendees(ArrayList<Integer> attended) {
         int numPerfAttendees = 0;
-        for (int i = 0; i < attended.size(); i = i + 1) {
+        for (int i = 0; i < attended.size(); i++) {
             if (attended.get(i) == 0) {
 
                 numPerfAttendees = numPerfAttendees + 1;
