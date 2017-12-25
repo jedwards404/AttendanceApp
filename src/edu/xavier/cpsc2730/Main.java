@@ -15,13 +15,15 @@ public class Main {
         System.out.println("\n\nHello, and welcome " + username + " to my new Attendance App!\n");
 
         //create ArrayList to find absences and put random numbers in an elements
-        ArrayList<Integer> attended = Initialize(username);
+        ArrayList<Integer> attended = initialize(username);
         System.out.println("The elements are " + attended);
+        System.out.println("There are " + perfectAttendees(attended) + " students with perfect attendance");
 
-        // how many students have perfect att
+
     }
 
-    private static ArrayList<Integer> Initialize(String username) {
+    // Function to make absenses
+    private static ArrayList<Integer> initialize(String username) {
         Random rand = new Random();
         ArrayList<Integer> absenses = new ArrayList<>();
         for (int i = 0; i < username.length(); i++) {
@@ -29,7 +31,17 @@ public class Main {
             absenses.add(genrandom);
         }
         return absenses;
+    }
 
-        // test comment
+    //Function to find perfect attendees
+    private static int perfectAttendees(ArrayList<Integer> attended) {
+        int numPerfAttendees = 0;
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            if (attended.get(i) == 0) {
+
+                numPerfAttendees = numPerfAttendees + 1;
+            }
+        }
+        return numPerfAttendees;
     }
 }
