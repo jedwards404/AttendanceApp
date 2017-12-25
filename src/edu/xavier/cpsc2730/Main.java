@@ -16,10 +16,15 @@ public class Main {
         ArrayList<Integer> attended = initialize(username);
         System.out.println("The elements are " + attended);
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
+        System.out.println("There are " + countPerfectAttendees( attended ) + " students with perfect attendance.");
 
 
     }
 
+    private static int countPerfectAttendees( ArrayList<Integer> attended ) {
+        return listOfPerfectAttendees( attended ).size();
+    }
+    
     // Function to make absenses
     private static ArrayList<Integer> initialize(String username) {
         Random rand = new Random();
