@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //read in user's name
+        //read user's name
         Scanner sc = new Scanner(System.in);
         System.out.print("Please enter your name:\t");
         String username = sc.next();
