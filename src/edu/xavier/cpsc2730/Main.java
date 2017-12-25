@@ -9,10 +9,8 @@ public class Main {
     public static void main(String[] args) {
 
         //read user's name
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Please enter your name:\t");
-        String username = sc.next();
-        System.out.println("\n\nHello, and welcome " + username + " to my new Attendance App!\n");
+        String username = readUserName();
+        System.out.println("\n\nHello " + username + ". Welcome to my new Attendance App!\n");
 
         //create ArrayList to find absences and put random numbers in an elements
         ArrayList<Integer> attended = initialize(username);
@@ -43,5 +41,12 @@ public class Main {
             }
         }
         return numPerfAttendees;
+    }
+    
+    private static String readUserName() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please enter your name:\t");
+        String username = sc.next();
+        return username;
     }
 }
