@@ -15,7 +15,7 @@ public class Main {
         //create ArrayList to find absences and put random numbers in an elements
         ArrayList<Integer> attended = initialize(username);
         System.out.println("The elements are " + attended);
-        System.out.println("There are " + perfectAttendees(attended) + " students with perfect attendance");
+        System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
 
 
     }
@@ -32,7 +32,16 @@ public class Main {
     }
 
     //Function to find perfect attendees
-    private static int perfectAttendees(ArrayList<Integer> attended) {
+    private static ArrayList<Integer> listOfPerfectAttendees(ArrayList<Integer> attended) {
+        ArrayList<Integer> perfectAttendees = new ArrayList<>();
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            if (attended.get(i) == 0) {
+                perfectAttendees.add(i);
+            }
+        }
+        return perfectAttendees;
+    }
+   /* private static int perfectAttendees(ArrayList<Integer> attended) {
         int numPerfAttendees = 0;
         for (int i = 0; i < attended.size(); i++) {
             if (attended.get(i) == 0) {
@@ -41,8 +50,10 @@ public class Main {
             }
         }
         return numPerfAttendees;
-    }
-    
+        /test comment
+        */
+
+
     private static String readUserName() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Please enter your name:\t");
