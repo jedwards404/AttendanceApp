@@ -41,18 +41,6 @@ public class Main {
         }
         return perfectAttendees;
     }
-   /* private static int perfectAttendees(ArrayList<Integer> attended) {
-        int numPerfAttendees = 0;
-        for (int i = 0; i < attended.size(); i++) {
-            if (attended.get(i) == 0) {
-
-                numPerfAttendees = numPerfAttendees + 1;
-            }
-        }
-        return numPerfAttendees;
-        /test comment
-        */
-
 
     private static String readUserName() {
         Scanner sc = new Scanner(System.in);
