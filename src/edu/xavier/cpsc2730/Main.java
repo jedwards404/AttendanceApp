@@ -18,10 +18,11 @@ public class Main {
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
         int minOfAbsences = 3;
+        int FE = 7;
         System.out.println("The average number of absences is " + averageFinder(attended));
         System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with fewer than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
-        System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(attended, minOfAbsences))
-        ;
+        System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(attended, minOfAbsences));
+        System.out.println("The students who FE'd are " + indexOfFEStudents(initialize(username), FE));
 
 
     }
@@ -79,6 +80,16 @@ public class Main {
         return percentFinder;
 
     }
+
+    //Function to find index of people who FE'd
+    private static ArrayList<Integer> indexOfFEStudents(ArrayList<Integer> initialize, int FE) {
+        ArrayList<Integer> studentsWhoFE = new ArrayList<>();
+        for (int i = 0; i < initialize.size(); i = i + 1) {
+        }
+        return studentsWhoFE;
+    }
+
+    //Function to find percentage of people who FE'd
 
 
    /* private static int perfectAttendees(ArrayList<Integer> attended) {
