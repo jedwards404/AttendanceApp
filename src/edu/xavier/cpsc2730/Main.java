@@ -17,7 +17,7 @@ public class Main {
         System.out.println("The elements are " + attended);
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
-        System.out.println("The average number of absenses is " + averageFinder(initialize(username)));
+        System.out.println("The average number of absenses is " + averageFinder(attended));
 
 
     }
