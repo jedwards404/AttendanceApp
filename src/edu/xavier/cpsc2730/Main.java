@@ -16,15 +16,16 @@ public class Main {
         ArrayList<Integer> attended = initialize(username);
         System.out.println("The elements are " + attended);
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
-        System.out.println("There are " + countPerfectAttendees( attended ) + " students with perfect attendance.");
+        System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
+        System.out.println("The average number of absenses is " + averageFinder(initialize(username)));
 
 
     }
 
-    private static int countPerfectAttendees( ArrayList<Integer> attended ) {
-        return listOfPerfectAttendees( attended ).size();
+    private static int countPerfectAttendees(ArrayList<Integer> attended) {
+        return listOfPerfectAttendees(attended).size();
     }
-    
+
     // Function to make absenses
     private static ArrayList<Integer> initialize(String username) {
         Random rand = new Random();
@@ -46,6 +47,29 @@ public class Main {
         }
         return perfectAttendees;
     }
+
+    //Function to find average of all absences
+    private static int averageFinder(ArrayList<Integer> absenses) {
+        int total = 0;
+        for (int i = 0; i < absenses.size(); i = i + 1) {
+            total = total + absenses.get(i);
+        }
+        total = total / absenses.size();
+        return total;
+    }
+
+   /* private static int perfectAttendees(ArrayList<Integer> attended) {
+        int numPerfAttendees = 0;
+        for (int i = 0; i < attended.size(); i++) {
+            if (attended.get(i) == 0) {
+
+                numPerfAttendees = numPerfAttendees + 1;
+            }
+        }
+        return numPerfAttendees;
+        /test comment
+        */
+
 
     private static String readUserName() {
         Scanner sc = new Scanner(System.in);
