@@ -17,8 +17,9 @@ public class Main {
         System.out.println("The elements are " + attended);
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
-        System.out.println("The average number of absenses is " + averageFinder(attended));
-        System.out.println("There are " + absencesLessHolder(attended) + " students with less than three absences and " + ((absencesLessHolder(attended).size() / attended.size()) * 100) + " students with perfect attendance");
+        int a = 3;
+        System.out.println("The average number of absences is " + averageFinder(attended));
+        System.out.println("There are " + absencesLessHolder(attended, a) + " students with less than " + a + " absences and " + ((absencesLessHolder(attended, a).size() / attended.size()) * 100) + " students with perfect attendance");
 
 
     }
@@ -60,14 +61,14 @@ public class Main {
     }
 
     //Function to find people who have less than three absences
-    private static ArrayList<Integer> absencesLessHolder(ArrayList<Integer> absences) {
-        ArrayList<Integer> absencesLessHolder = new ArrayList<>();
+    private static ArrayList<Integer> absencesLessHolder(ArrayList<Integer> absences, int a) {
+        ArrayList<Integer> absencesCalcHolder = new ArrayList<>();
         for (int i = 0; i < absences.size(); i = i + 1) {
-            if (absences.get(i) < 3) {
-                absencesLessHolder.get(i);
+            if (absences.get(i) < a) {
+                absencesCalcHolder.add(absences.get(i));
             }
         }
-        return absencesLessHolder(absences);
+        return absencesCalcHolder;
     }
 
    /* private static int perfectAttendees(ArrayList<Integer> attended) {
