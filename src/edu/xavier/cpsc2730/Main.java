@@ -49,8 +49,8 @@ public class Main {
     }
 
     //Function to find average of all absences
-    private static int averageFinder(ArrayList<Integer> absenses) {
-        int total = 0;
+    private static double averageFinder(ArrayList<Integer> absenses) {
+        double total = 0;
         for (int i = 0; i < absenses.size(); i = i + 1) {
             total = total + absenses.get(i);
         }
