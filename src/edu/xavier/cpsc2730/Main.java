@@ -74,6 +74,8 @@ public class Main {
 
     //Function to find percentage
     private static int percentFinder(ArrayList<Integer> absencesLessHolder, ArrayList<Integer> absences) {
+        absencesLessHolder(absences, countPerfectAttendees(absences));
+        initialize(readUserName());
         int percentFinder = (absences.size() / absencesLessHolder.size()) * 100;
         return percentFinder;
 
