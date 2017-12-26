@@ -20,7 +20,7 @@ public class Main {
         int minOfAbsences = 3;
         System.out.println("The average number of absences is " + averageFinder(attended));
         System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with fewer than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
-        System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentFinder(absencesLessHolder(attended, minOfAbsences), initialize(username)));
+        System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(absencesLessHolder(attended, minOfAbsences), minOfAbsences));
 
 
     }
@@ -73,13 +73,12 @@ public class Main {
     }
 
     //Function to find percentage
-    private static int percentFinder(ArrayList<Integer> absencesLessHolder, ArrayList<Integer> absences) {
-        absencesLessHolder(absences, countPerfectAttendees(absences));
-        initialize(readUserName());
-        int percentFinder = (absences.size() / absencesLessHolder.size()) * 100;
+    private static int percentOfAbsences(ArrayList<Integer> absences, int minOfAbsences) {
+        int percentFinder = (absencesLessHolder(absences, countPerfectAttendees(absences)).size() / absences.size()) * 100;
         return percentFinder;
 
     }
+
 
    /* private static int perfectAttendees(ArrayList<Integer> attended) {
         int numPerfAttendees = 0;
