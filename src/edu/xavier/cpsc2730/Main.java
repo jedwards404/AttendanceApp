@@ -18,7 +18,7 @@ public class Main {
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
         System.out.println("The average number of absenses is " + averageFinder(attended));
-        System.out.println("There are " + absencesLess_3Finder(attended) + " students with less than three absences and " + ((countPerfectAttendees(attended) / attended.size()) * 100) + " students with perfect attendance");
+        System.out.println("There are " + absencesLessFinder(attended) + " students with less than three absences and " + ((countPerfectAttendees(attended) / attended.size()) * 100) + " students with perfect attendance");
 
 
     }
@@ -27,15 +27,15 @@ public class Main {
         return listOfPerfectAttendees(attended).size();
     }
 
-    // Function to make absenses
+    // Function to make absences
     private static ArrayList<Integer> initialize(String username) {
         Random rand = new Random();
-        ArrayList<Integer> absenses = new ArrayList<>();
+        ArrayList<Integer> absences = new ArrayList<>();
         for (int i = 0; i < username.length(); i++) {
             int genrandom = rand.nextInt(11);
-            absenses.add(genrandom);
+            absences.add(genrandom);
         }
-        return absenses;
+        return absences;
     }
 
     //Function to find perfect attendees
@@ -60,15 +60,16 @@ public class Main {
     }
 
     //Function to find people who have less than three absences
-    private static double absencesLess_3Finder(ArrayList<Integer> absenses) {
-        int studentsLess3Absenses = 0;
-        for (int i = 0; i < absenses.size(); i = i + 1) {
-            if (absenses.get(i) > 3) {
-                studentsLess3Absenses = studentsLess3Absenses + 1;
+    private static int absencesLessFinder(ArrayList<Integer> absences) {
+        int studentsLessAbsences = 0;
+        ArrayList<Integer> absencesLessHolder = new ArrayList<>();
+        for (int i = 0; i < absences.size(); i = i + 1) {
+            if (absences.get(i) < 3) {
+                studentsLessAbsences = studentsLessAbsences + 1;
+                absencesLessHolder.get(i);
             }
-            studentsLess3Absenses = absenses.size() / studentsLess3Absenses * 100;
         }
-        return studentsLess3Absenses;
+        return studentsLessAbsences;
     }
 
    /* private static int perfectAttendees(ArrayList<Integer> attended) {
