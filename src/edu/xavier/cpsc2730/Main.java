@@ -17,9 +17,9 @@ public class Main {
         System.out.println("The elements are " + attended);
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
-        int a = 3;
+        int minOfAbsences = 3;
         System.out.println("The average number of absences is " + averageFinder(attended));
-        System.out.println("There are " + absencesLessHolder(attended, a) + " students with less than " + a + " absences and " + ((absencesLessHolder(attended, a).size() / attended.size()) * 100) + " students with perfect attendance");
+        System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with less than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
 
 
     }
