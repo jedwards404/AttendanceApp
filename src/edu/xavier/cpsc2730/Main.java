@@ -22,7 +22,7 @@ public class Main {
         System.out.println("The average number of absences is " + averageFinder(attended));
         System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with fewer than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
         System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(attended, minOfAbsences));
-        System.out.println("The students who FE'd are " + indexOfFEStudents(initialize(username), FE));
+        System.out.println("The students who FE'd are " + indexOfFEStudents(attended, FE));
 
 
     }
@@ -63,11 +63,11 @@ public class Main {
         return total;
     }
 
-    //Function to find people who have less than three absences
-    private static ArrayList<Integer> absencesLessHolder(ArrayList<Integer> absences, int a) {
+    //Function to find people who have less than some # of absences
+    private static ArrayList<Integer> absencesLessHolder(ArrayList<Integer> absences, int FE) {
         ArrayList<Integer> absencesCalcHolder = new ArrayList<>();
         for (int i = 0; i < absences.size(); i = i + 1) {
-            if (absences.get(i) < a) {
+            if (absences.get(i) < FE) {
                 absencesCalcHolder.add(absences.get(i));
             }
         }
@@ -75,17 +75,23 @@ public class Main {
     }
 
     //Function to find percentage
-    private static int percentOfAbsences(ArrayList<Integer> attended, int a) {
-        int percentFinder = (listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, a).size() * 100);
+    private static int percentOfAbsences(ArrayList<Integer> attended, int FE) {
+        int percentFinder = (listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, FE).size() * 100);
         return percentFinder;
         //test
         //test 2
     }
 
     //Function to find index of people who FE'd
-    private static ArrayList<Integer> indexOfFEStudents(ArrayList<Integer> initialize, int FE) {
+    private static ArrayList<Integer> indexOfFEStudents(ArrayList<Integer> attended, int FE) {
+
         ArrayList<Integer> studentsWhoFE = new ArrayList<>();
-        for (int i = 0; i < initialize.size(); i = i + 1) {
+        absencesLessHolder(attended, FE);
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            if (absencesLessHolder(attended, FE).get(i) < FE) {
+                studentsWhoFE.add(i);
+            }
+
         }
         return studentsWhoFE;
     }
