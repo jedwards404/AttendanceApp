@@ -79,7 +79,7 @@ public class Main {
         int percentFinder = (listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, a).size() * 100);
         return percentFinder;
         //test
-
+        //test 2
     }
 
     //Function to find index of people who FE'd
