@@ -80,6 +80,7 @@ public class Main {
         return percentFinder;
         //test
         //test 2
+        //test 3
     }
 
     //Function to find index of people who FE'd
