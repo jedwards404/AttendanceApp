@@ -78,6 +78,7 @@ public class Main {
     private static int percentOfAbsences(ArrayList<Integer> attended, int a) {
         int percentFinder = (listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, a).size() * 100);
         return percentFinder;
+        //test
 
     }
 
