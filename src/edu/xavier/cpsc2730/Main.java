@@ -1,9 +1,7 @@
 package edu.xavier.cpsc2730;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Main {
     final static int minOfAbsences = 3;
@@ -26,6 +24,8 @@ public class Main {
         System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with fewer than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
         System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(attended, minOfAbsences));
         System.out.println("The students who FE'd are " + indexOfFEStudents(attended, FE));
+        System.out.println(duplicateElementFinder(attended));
+        System.out.println("uniques: " + uniqueElementFinder(attended));
 
 
     }
@@ -46,7 +46,7 @@ public class Main {
     }
 
     //Function to find perfect attendees
-    private static ArrayList<Integer> listOfPerfectAttendees(ArrayList<Integer> attended) {
+    private static ArrayList<Integer> listOfPerfectAttendees(final ArrayList<Integer> attended) {
         ArrayList<Integer> perfectAttendees = new ArrayList<>();
         for (int i = 0; i < attended.size(); i = i + 1) {
             if (attended.get(i) == 0) {
@@ -57,7 +57,7 @@ public class Main {
     }
 
     //Function to find average of all absences
-    private static double averageFinder(ArrayList<Integer> absenses) {
+    private static double averageFinder(final ArrayList<Integer> absenses) {
         double total = 0;
         for (int i = 0; i < absenses.size(); i = i + 1) {
             total = total + absenses.get(i);
@@ -67,7 +67,7 @@ public class Main {
     }
 
     //Function to find people who have less than some # of absences
-    private static ArrayList<Integer> absencesLessHolder(ArrayList<Integer> absences, int FE) {
+    private static ArrayList<Integer> absencesLessHolder(final ArrayList<Integer> absences, int FE) {
         ArrayList<Integer> absencesCalcHolder = new ArrayList<>();
         for (int i = 0; i < absences.size(); i = i + 1) {
             if (absences.get(i) < FE) {
@@ -78,7 +78,7 @@ public class Main {
     }
 
     //Function to find percentage
-    private static int percentOfAbsences(ArrayList<Integer> attended, int FE) {
+    private static int percentOfAbsences(final ArrayList<Integer> attended, int FE) {
         int percentFinder = ((listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, FE).size()) * 100);
         return percentFinder;
         //test
@@ -87,12 +87,12 @@ public class Main {
     }
 
     //Function to find index of people who FE'd
-    private static ArrayList<Integer> indexOfFEStudents(ArrayList<Integer> attended, int FE) {
+    private static ArrayList<Integer> indexOfFEStudents(final ArrayList<Integer> attended, int FE) {
 
         ArrayList<Integer> studentsWhoFE = new ArrayList<>();
-        absencesLessHolder(attended, FE);
-        for (int i = 0; i < attended.size(); i = i + 1) {
-            if (absencesLessHolder(attended, FE).get(i) < FE) {
+        ArrayList<Integer> list = absencesLessHolder(attended, FE);
+        for (int i = 0; i < list.size(); i = i + 1) {
+            if (list.get(i) < FE) {
                 studentsWhoFE.add(i);
             }
 
@@ -101,7 +101,7 @@ public class Main {
     }
 
     //Function to add value [X] to absence greater than [Y]
-    private static ArrayList<Integer> changeElementYbyX(ArrayList<Integer> attended, int X, int Y) {
+    private static ArrayList<Integer> changeElementYbyX(final ArrayList<Integer> attended, int X, int Y) {
         for (int i = 0; i < attended.size(); i = i + 1) {
             if (attended.get(i) < Y) {
                 attended.set(X, i);
@@ -119,7 +119,7 @@ public class Main {
     }
 
     //Function to sort absences array using library function
-    private static ArrayList<Integer> sortAbsences(ArrayList<Integer> attended) {
+    private static ArrayList<Integer> sortAbsences(final ArrayList<Integer> attended) {
         for (int i = 0; i < attended.size(); i = i + 1) {
             Collections.sort(attended);
         }
@@ -127,15 +127,38 @@ public class Main {
     }
 
     //Function to shuffle the elements in the absences ArrayList
-    private static ArrayList<Integer> shuffleAbsences(ArrayList<Integer> attended) {
+    private static ArrayList<Integer> shuffleAbsences(final ArrayList<Integer> attended) {
         for (int i = 0; i < attended.size(); i = i + 1) {
             Collections.shuffle(attended);
         }
         return attended;
     }
 
-    //Function to find percentage of people who FE'd
+    //Function to find duplicate elements in absences
+    private static ArrayList<Integer> duplicateElementFinder(final ArrayList<Integer> attended) {
+        ArrayList<Integer> duplicateAbsenceValues = new ArrayList<>();
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            if (attended.lastIndexOf(attended.get(i)) != i) {
+                duplicateAbsenceValues.add(attended.get(i));
+            }
 
+        }
+        return duplicateAbsenceValues;
+    }
+
+    private static ArrayList<Integer> uniqueElementFinder(final ArrayList<Integer> array) {
+        ArrayList<Integer> uniques = new ArrayList<>();
+        Set<Integer> uniquesSet = new HashSet<>();
+
+        for (int i = 0; i < array.size(); i = i + 1) {
+            int num = array.get(i);
+            if (uniquesSet.add(num) == true) {
+                uniques.add(num);
+            }
+        }
+
+        return uniques;
+    }
 
    /* private static int perfectAttendees(ArrayList<Integer> attended) {
         int numPerfAttendees = 0;
