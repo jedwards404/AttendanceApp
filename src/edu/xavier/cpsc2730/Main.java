@@ -1,10 +1,15 @@
 package edu.xavier.cpsc2730;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
+    final static int minOfAbsences = 3;
+    final static int FE = 7;
+    final static int X = 8;
+    final static int Y = 4;
 
     public static void main(String[] args) {
 
@@ -17,8 +22,6 @@ public class Main {
         System.out.println("The elements are " + attended);
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
-        int minOfAbsences = 3;
-        int FE = 7;
         System.out.println("The average number of absences is " + averageFinder(attended));
         System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with fewer than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
         System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(attended, minOfAbsences));
@@ -76,7 +79,7 @@ public class Main {
 
     //Function to find percentage
     private static int percentOfAbsences(ArrayList<Integer> attended, int FE) {
-        int percentFinder = (listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, FE).size() * 100);
+        int percentFinder = ((listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, FE).size()) * 100);
         return percentFinder;
         //test
         //test 2
@@ -95,6 +98,40 @@ public class Main {
 
         }
         return studentsWhoFE;
+    }
+
+    //Function to add value [X] to absence greater than [Y]
+    private static ArrayList<Integer> changeElementYbyX(ArrayList<Integer> attended, int X, int Y) {
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            if (attended.get(i) < Y) {
+                attended.set(X, i);
+                // example int num = attended.get(i < Y ? 5:2);
+                if (attended.get(i) > 15) {
+                    attended.set(i, 15);
+                }
+                if (attended.get(i) < 0) {
+                    attended.set(i, 0);
+                }
+            }
+        }
+        return attended;
+
+    }
+
+    //Function to sort absences array using library function
+    private static ArrayList<Integer> sortAbsences(ArrayList<Integer> attended) {
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            Collections.sort(attended);
+        }
+        return attended;
+    }
+
+    //Function to shuffle the elements in the absences ArrayList
+    private static ArrayList<Integer> shuffleAbsences(ArrayList<Integer> attended) {
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            Collections.shuffle(attended);
+        }
+        return attended;
     }
 
     //Function to find percentage of people who FE'd
