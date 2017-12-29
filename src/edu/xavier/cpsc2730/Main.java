@@ -17,6 +17,7 @@ public class Main {
 
         //create ArrayList to find absences and put random numbers in an elements
         ArrayList<Integer> attended = initialize(username);
+        ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
         System.out.println("The elements are " + attended);
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
@@ -26,8 +27,15 @@ public class Main {
         System.out.println("The students who FE'd are " + indexOfFEStudents(attended, FE));
         System.out.println(duplicateElementFinder(attended));
         System.out.println("uniques: " + uniqueElementFinder(attended));
+        System.out.println("The absences are " + numOfEachAbsenceValue(attended, countOfSameAbsenceValue));
+        System.out.println(attended.hashCode());
 
 
+        for (int element : attended) {
+            System.out.print(element + ", ");
+        }
+
+        System.out.println("stream: " + attended.stream().filter(p -> p % 2 == 0).count());
     }
 
     private static int countPerfectAttendees(ArrayList<Integer> attended) {
@@ -146,6 +154,7 @@ public class Main {
         return duplicateAbsenceValues;
     }
 
+    // function to return unique elements in attended
     private static ArrayList<Integer> uniqueElementFinder(final ArrayList<Integer> array) {
         ArrayList<Integer> uniques = new ArrayList<>();
         Set<Integer> uniquesSet = new HashSet<>();
@@ -159,6 +168,62 @@ public class Main {
 
         return uniques;
     }
+
+    /*
+
+    get unique elements
+    for each element in uniques
+        int count = countElement( element, attended );
+
+
+
+
+     */
+
+    //function to return num of each absence value
+    private static Map<Integer, Integer> numOfEachAbsenceValue(final ArrayList<Integer> attended, ArrayList<Integer> countOfSameAbsenceValue) {
+
+        Map<Integer, Integer> values = new HashMap<>();
+        for (int i = 0; i < attended.size(); i++) {
+            int key = attended.get(i);
+
+            if (values.containsKey(key)) {
+                values.put(key, values.get(key) + 1);
+            } else {
+                values.put(key, 1);
+            }
+        }
+
+        return values;
+
+//
+//
+//        ArrayList<Integer> sortedElementOfAbsenceValue = new ArrayList<>();
+//        sortAbsences(attended);
+//        System.out.println("Sorted attended: " + attended);
+//        int i = 0;
+//        while (i < attended.size() - 1) {
+//            sortedElementOfAbsenceValue.add(attended.get(i));
+//            countOfSameAbsenceValue.add(1);
+//            // if (attended.get(i) == attended.get(i + 1)) {
+//            while (i < attended.size() && sortedElementOfAbsenceValue.get(i) == attended.get(i + 1)) {
+//                countOfSameAbsenceValue.set(i, countOfSameAbsenceValue.get(i) + 1);
+//                i = i + 1;
+//            }
+//            if (sortedElementOfAbsenceValue.get(sortedElementOfAbsenceValue.size()) != attended.get(attended.size() - 1)) {
+//                sortedElementOfAbsenceValue.add(attended.size() - 1);
+//                countOfSameAbsenceValue.add(1);
+//            }
+//            //}
+//
+//            i++;
+//        }
+//
+//        return sortedElementOfAbsenceValue;
+//
+
+    }
+
 
    /* private static int perfectAttendees(ArrayList<Integer> attended) {
         int numPerfAttendees = 0;
@@ -179,4 +244,5 @@ public class Main {
         String username = sc.next();
         return username;
     }
+
 }
