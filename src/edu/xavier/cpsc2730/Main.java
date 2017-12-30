@@ -1,9 +1,9 @@
 package edu.xavier.cpsc2730;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 
-import java.lang.reflect.Array;
+import java.time.Clock;
 import java.util.*;
+
 
 public class Main {
     final static int minOfAbsences = 3;
@@ -34,6 +34,8 @@ public class Main {
         System.out.println("the shuffled absences are " + attended);
         bubbleSort(attended);
         System.out.println("The array when bubble sorted is " + attended);
+        System.out.println("Your usernames are " + usernameHolder());
+        System.out.println("your shuffled usernames are " + shuffleUsernameHolder(usernameHolder()));
 
 
         for (int element : attended) {
@@ -217,16 +219,45 @@ public class Main {
                     int temp = attended.get(i);
                     attended.set(i, attended.get(j));
                     attended.set(j, temp);
+                }
+            }
+        }
+    }
+
+
+    //Create and output an ArrayList of 5 distinct names
+    private static ArrayList<String> usernameHolder() {
+        ArrayList<String> userNames = new ArrayList<>();
+        userNames.add("Joshua");
+        userNames.add("Andrea");
+        userNames.add("Torin");
+        userNames.add("Beatrice");
+        userNames.add("Willie");
+        return userNames;
+
+    }
+
+    //function to shuffle the name using a user-defined shuffle function
+    private static ArrayList<String> shuffleUsernameHolder(ArrayList<String> usernameHolder) {
+        Random random = new Random(usernameHolder.size());
+        random.setSeed(System.nanoTime());
+
+
+        for (int i = 0; i < usernameHolder.size(); i = i + 1) {
+            int rand = random.nextInt(usernameHolder.size() + 1) % usernameHolder.size();
+            String temp = usernameHolder.get(rand);
+            usernameHolder.set(rand, usernameHolder.get(i));
+            usernameHolder.set(i, temp);
+
+        }
+
+        return usernameHolder;
+    }
 
 //                int temp = num1;
 //                num1 = num2;
 //                num2 = temp;
 
-
-                }
-            }
-        }
-    }
 
 //
 //
