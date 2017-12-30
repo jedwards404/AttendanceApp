@@ -1,5 +1,7 @@
 package edu.xavier.cpsc2730;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -28,7 +30,8 @@ public class Main {
         System.out.println(duplicateElementFinder(attended));
         System.out.println("uniques: " + uniqueElementFinder(attended));
         System.out.println("The absences are " + numOfEachAbsenceValue(attended, countOfSameAbsenceValue));
-        System.out.println(attended.hashCode());
+        shuffleAbsences(attended);
+        System.out.println("the shuffled absences are " + attended);
 
 
         for (int element : attended) {
@@ -195,6 +198,13 @@ public class Main {
         }
 
         return values;
+    }
+
+        //function to shuffle absences using Collections.shuffle()
+
+    private static void shufflesAbsences(ArrayList<Integer> attended) {
+        Collections.shuffle(attended);
+    }
 
 //
 //
@@ -222,7 +232,7 @@ public class Main {
 //        return sortedElementOfAbsenceValue;
 //
 
-    }
+
 
 
    /* private static int perfectAttendees(ArrayList<Integer> attended) {
