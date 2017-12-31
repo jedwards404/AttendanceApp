@@ -52,7 +52,25 @@ public class Main {
         boolean allFiveUsed = allNamesUsed(usedNames, uniqueNames);
         System.out.println("\nWere all the names were used? " + allNamesUsed(usedNames, uniqueNames));
 
+        //What are the names of the students with perfect attendance
+        ArrayList<String> studentNames = buildListNames(uniqueNames, attended.size());
+        ArrayList<Integer> absences = initialize(username);
+
+        ArrayList<String> answer = perfectAttendeesNames(studentNames, absences);
+        System.out.println("The names of students with perfect attendance are " + answer);
+
     }
+
+    private static ArrayList<String> perfectAttendeesNames(ArrayList<String> studentNames, ArrayList<Integer> absences) {
+        ArrayList<String> perfectAttendeesNames = new ArrayList<>();
+        for (int i = 0; i < absences.size(); i = i + 1) {
+            if (absences.get(i) == 0) {
+                perfectAttendeesNames.add(studentNames.get(i));
+            }
+        }
+        return perfectAttendeesNames;
+    }
+
 
     private static boolean allNamesUsed(ArrayList<String> usedNames, ArrayList<String> uniqueNames) {
         boolean allUsed = false;
