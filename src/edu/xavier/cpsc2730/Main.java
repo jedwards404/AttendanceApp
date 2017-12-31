@@ -35,17 +35,34 @@ public class Main {
         System.out.println("the shuffled absences are " + attended);
         bubbleSort(attended);
         System.out.println("The array when bubble sorted is " + attended);
-        System.out.println("Your usernames are " + usernameHolder());
-        System.out.println("your shuffled usernames are " + shuffleUsernameHolder(usernameHolder()));
+        System.out.println("Your usernames are " + store5names());
+        System.out.println("your shuffled usernames are " + shuffleUsernameHolder(store5names()));
         int numOfStudents = attended.size();
-        System.out.println("usernames for array size of attended are " + attendedUsernameHolderBuilder(usernameHolder(), numOfStudents));
+        System.out.println("usernames for array size of attended are " + buildListNames(store5names(), numOfStudents));
 
+        // create an ArrayList of names
+        ArrayList<String> names = store5names();
 
-        for (int element : attended) {
-            System.out.print(element + ", ");
+        // pull out the unique names
+        ArrayList<String> uniqueNames = findUniques(names);
+        System.out.println("\nThe unique names are " + uniqueNames);
+
+        //Were all five names used at least once
+        ArrayList<String> usedNames = store5names();
+        boolean allFiveUsed = allNamesUsed(usedNames, uniqueNames);
+        System.out.println("\nWere all the names were used? " + allNamesUsed(usedNames, uniqueNames));
+
+    }
+
+    private static boolean allNamesUsed(ArrayList<String> usedNames, ArrayList<String> uniqueNames) {
+        boolean allUsed = false;
+        for (int i = 0; i < usedNames.size(); i = i + 1) {
+            allUsed = uniqueNames.contains(usedNames.get(i));
+            if (allUsed == false) {
+                return false;
+            }
         }
-
-        System.out.println("stream: " + attended.stream().filter(p -> p % 2 == 0).count());
+        return allUsed;
     }
 
     private static int countPerfectAttendees(ArrayList<Integer> attended) {
@@ -97,11 +114,17 @@ public class Main {
 
     //Function to find percentage
     private static int percentOfAbsences(final ArrayList<Integer> attended, int FE) {
-        int percentFinder = ((listOfPerfectAttendees(attended).size() / absencesLessHolder(attended, FE).size()) * 100);
+        int percentFinder;
+        int denominator = absencesLessHolder(attended, FE).size();
+        if (denominator != 0) {
+            percentFinder = ((listOfPerfectAttendees(attended).size() / denominator) * 100);
+        } else {
+            return 0;
+
+
+        }
+
         return percentFinder;
-        //test
-        //test 2
-        //test 3
     }
 
     //Function to find index of people who FE'd
@@ -229,7 +252,7 @@ public class Main {
 
 
     //Create and output an ArrayList of 5 distinct names
-    private static ArrayList<String> usernameHolder() {
+    private static ArrayList<String> store5names() {
         ArrayList<String> userNames = new ArrayList<>();
         userNames.add("Joshua");
         userNames.add("Andrea");
@@ -257,59 +280,40 @@ public class Main {
         return usernameHolder;
     }
 
-    //Function to create second arraylist the same size as absenceslist
-    private static ArrayList<String> attendedUsernameHolderBuilder(ArrayList<String> usernameHolder, int numOfStudents) {
-        ArrayList<String> dynamicUsernameHolder = new ArrayList<>();
-        for (int i = 0; i < numOfStudents; i = i + 1) {
-            dynamicUsernameHolder.add(shuffleUsernameHolder(usernameHolder).get(i));
+
+    // repeatedly use list of names to end up with numOfNeedeNames
+    private static ArrayList<String> buildListNames(ArrayList<String> names, int numOfNeededNames) {
+        ArrayList<String> answer = new ArrayList<>();
+        Random rand = new Random();
+
+        for (int i = 0; i < numOfNeededNames; i++) {
+            answer.add(names.get(rand.nextInt(names.size())));
         }
-        return dynamicUsernameHolder;
+
+        return answer;
     }
-//                int temp = num1;
-//                num1 = num2;
-//                num2 = temp;
 
-
-//
-//
-//        ArrayList<Integer> sortedElementOfAbsenceValue = new ArrayList<>();
-//        sortAbsences(attended);
-//        System.out.println("Sorted attended: " + attended);
-//        int i = 0;
-//        while (i < attended.size() - 1) {
-//            sortedElementOfAbsenceValue.add(attended.get(i));
-//            countOfSameAbsenceValue.add(1);
-//            // if (attended.get(i) == attended.get(i + 1)) {
-//            while (i < attended.size() && sortedElementOfAbsenceValue.get(i) == attended.get(i + 1)) {
-//                countOfSameAbsenceValue.set(i, countOfSameAbsenceValue.get(i) + 1);
-//                i = i + 1;
-//            }
-//            if (sortedElementOfAbsenceValue.get(sortedElementOfAbsenceValue.size()) != attended.get(attended.size() - 1)) {
-//                sortedElementOfAbsenceValue.add(attended.size() - 1);
-//                countOfSameAbsenceValue.add(1);
-//            }
-//            //}
-//
-//            i++;
+    //Function to create second arraylist the same size as absenceslist
+//    private static ArrayList<String> attendedUsernameHolderBuilder(ArrayList<String> names, int numNeededNames) {
+//        ArrayList<String> dynamicUsernameHolder = new ArrayList<>();
+//        for (int i = 0; i < numNeededNames; i = i + 1) {
+//            dynamicUsernameHolder.add(shuffleUsernameHolder(names).get(i));
 //        }
-//
-//        return sortedElementOfAbsenceValue;
-//
+//        return dynamicUsernameHolder;
+//    }
 
+    //
+    private static ArrayList<String> findUniques(ArrayList<String> list) {
+        Set<String> listedUniques = new HashSet<>();
+        ArrayList<String> uniques = new ArrayList<>();
 
+        for (int i = 0; i < store5names().size(); i = i + 1) {
+            listedUniques.add(store5names().get(i));
 
-
-   /* private static int perfectAttendees(ArrayList<Integer> attended) {
-        int numPerfAttendees = 0;
-        for (int i = 0; i < attended.size(); i++) {
-            if (attended.get(i) == 0) {
-
-                numPerfAttendees = numPerfAttendees + 1;
-            }
         }
-        return numPerfAttendees;
-        /test comment
-        */
+        uniques.addAll(listedUniques);
+        return uniques;
+    }
 
 
     private static String readUserName() {
