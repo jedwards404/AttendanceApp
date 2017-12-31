@@ -36,6 +36,7 @@ public class Main {
         System.out.println("The array when bubble sorted is " + attended);
         System.out.println("Your usernames are " + usernameHolder());
         System.out.println("your shuffled usernames are " + shuffleUsernameHolder(usernameHolder()));
+        System.out.println("usernames for array size of attended are " + attendedUsernameHolderBuilder(usernameHolder(),attended));
 
 
         for (int element : attended) {
@@ -254,6 +255,14 @@ public class Main {
         return usernameHolder;
     }
 
+    //Function to create second arraylist the same size as absenceslist
+    private static ArrayList<String> attendedUsernameHolderBuilder(ArrayList<String> usernameHolder, ArrayList<Integer> attended) {
+        ArrayList<String> dynamicUsernameHolder = new ArrayList<>();
+        for (int i = 0; i < attended.size(); i = i + 1) {
+            dynamicUsernameHolder.add(shuffleUsernameHolder(usernameHolder).get(i));
+        }
+        return dynamicUsernameHolder;
+    }
 //                int temp = num1;
 //                num1 = num2;
 //                num2 = temp;
