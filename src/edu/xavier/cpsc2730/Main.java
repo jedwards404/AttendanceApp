@@ -10,7 +10,7 @@ public class Main {
     final static int FE = 7;
     final static int X = 8;
     final static int Y = 4;
-    final static int numOfStudents = 5;
+
 
     public static void main(String[] args) {
 
@@ -37,6 +37,7 @@ public class Main {
         System.out.println("The array when bubble sorted is " + attended);
         System.out.println("Your usernames are " + usernameHolder());
         System.out.println("your shuffled usernames are " + shuffleUsernameHolder(usernameHolder()));
+        int numOfStudents = attended.size();
         System.out.println("usernames for array size of attended are " + attendedUsernameHolderBuilder(usernameHolder(), numOfStudents));
 
 
