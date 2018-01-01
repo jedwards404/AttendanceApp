@@ -5,7 +5,8 @@ import java.util.*;
 
 
 public class Main {
-    final static int minOfAbsences = 3;
+    final static int MIN_ALLOWED_ABSENCES = 3;
+    final static int MAX_NUM_ABSENCES = 10;
     final static int FE = 7;
     final static int X = 8;
     final static int Y = 4;
@@ -13,19 +14,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //read user's name
-        String username = readUserName();
-        System.out.println("\n\nHello " + username + ". Welcome to my new Attendance App!\n");
+        System.out.println("\n=====  Welcome to the Attendance App  =====\n");
 
-        //create ArrayList to find absences and put random numbers in an elements
-        ArrayList<Integer> attended = initialize(username);
+        String username = readUserName();
+        System.out.println("\nHello, your name is " + username + "\n");
+
+        ArrayList<Integer> attended = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
+        System.out.println("\nThe elements are " + attended);
+
+        ArrayList<Integer> list = listOfPerfectAttendees(attended);
+        System.out.println("\n" + list + " had perfect attendance");
+
         ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
-        System.out.println("The elements are " + attended);
-        System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
         System.out.println("The average number of absences is " + averageFinder(attended));
-        System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with fewer than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
-        System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(attended, minOfAbsences));
+        System.out.println("There are " + absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences and " + ((absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() / attended.size()) * 100) + " students with perfect attendance");
+        System.out.println("The percent of students with less than " + MIN_ALLOWED_ABSENCES + " absences is " + percentOfAbsences(attended, MIN_ALLOWED_ABSENCES));
         System.out.println("The students who FE'd are " + indexOfFEStudents(attended, FE));
         System.out.println(duplicateElementFinder(attended));
         System.out.println("uniques: " + uniqueElementFinder(attended));
@@ -54,7 +58,7 @@ public class Main {
 
         //What are the names of the students with perfect attendance
         ArrayList<String> studentNames = buildListNames(uniqueNames, attended.size());
-        ArrayList<Integer> absences = initialize(username);
+        ArrayList<Integer> absences = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
 
         ArrayList<String> answer = perfectAttendeesNames(studentNames, absences);
         System.out.println("The names of the students with perfect attendance are " + answer);
@@ -123,12 +127,17 @@ public class Main {
         return listOfPerfectAttendees(attended).size();
     }
 
-    // Function to make absences
-    private static ArrayList<Integer> initialize(String username) {
+    /**
+     *  Return a list of length random integers in the range [0..bound]
+     * @param length the number of integers to store in the list
+     * @param bound the upper bound of the random integers
+     * @return the list of length random integers
+     */
+    private static ArrayList<Integer> initializeAbsences(int length, int bound) {
         Random rand = new Random();
         ArrayList<Integer> absences = new ArrayList<>();
-        for (int i = 0; i < username.length(); i++) {
-            int genrandom = rand.nextInt(11);
+        for (int i = 0; i < length; i++) {
+            int genrandom = rand.nextInt(bound+1); // [0..bound]
             absences.add(genrandom);
         }
         return absences;
