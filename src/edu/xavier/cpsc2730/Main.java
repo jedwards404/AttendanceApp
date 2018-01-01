@@ -20,22 +20,31 @@ public class Main {
         System.out.println("\nHello, your name is " + username + "\n");
 
         ArrayList<Integer> attended = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
-        System.out.println("\nThe elements are " + attended);
+        System.out.println("\nThe absences are " + attended);
 
         ArrayList<Integer> list = listOfPerfectAttendees(attended);
-        System.out.println("\n" + list + " had perfect attendance");
+        System.out.println("\nStudents " + list + " had perfect attendance");
 
         int count = countPerfectAttendees(attended);
-        System.out.println("\nThere are " + count + " students with perfect attendance.");
+        System.out.println("There are " + count + " students with perfect attendance.");
 
         double avg = averageAbsences(attended);
         System.out.println("The average number of absences is " + avg);
 
+        // TODO change name of absencesLessHolder to something more descriptive
+        list = absencesLessHolder(attended, MIN_ALLOWED_ABSENCES);
+        System.out.println("There are " + list.size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences.");
+
+        avg = percentOfAbsences(attended, MIN_ALLOWED_ABSENCES);
+        System.out.println("The percent of students with fewer than " + MIN_ALLOWED_ABSENCES + " absences is " + avg);
+
+        list = indexesOfFEs(attended, FE);
+        System.out.println("The students who FE'd are at indexes " + list);
+
+        list = duplicateElementFinder(attended);
+        System.out.println("\nThe duplicates are " + list);
+
         ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
-        System.out.println("There are " + absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences and " + ((absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() / attended.size()) * 100) + " students with perfect attendance");
-        System.out.println("The percent of students with less than " + MIN_ALLOWED_ABSENCES + " absences is " + percentOfAbsences(attended, MIN_ALLOWED_ABSENCES));
-        System.out.println("The students who FE'd are " + indexOfFEStudents(attended, FE));
-        System.out.println(duplicateElementFinder(attended));
         System.out.println("uniques: " + uniqueElementFinder(attended));
         System.out.println("The absences are " + numOfEachAbsenceValue(attended, countOfSameAbsenceValue));
         shuffleAbsences(attended);
@@ -189,12 +198,17 @@ public class Main {
         return absencesCalcHolder;
     }
 
-    //Function to find percentage
-    private static int percentOfAbsences(final ArrayList<Integer> attended, int FE) {
-        int percentFinder;
+    /**
+     * calculates the percentage of student who FE'd
+     * @param attended the lis tof students
+     * @param FE the number of absences that results in an FE
+     * @return the percentage of students who have FE'd
+     */
+    private static double percentOfAbsences(final ArrayList<Integer> attended, int FE) {
+        double percentFinder;
         int denominator = absencesLessHolder(attended, FE).size();
         if (denominator != 0) {
-            percentFinder = ((listOfPerfectAttendees(attended).size() / denominator) * 100);
+            percentFinder = (double) (listOfPerfectAttendees(attended).size() / denominator * 100);
         } else {
             return 0;
 
@@ -205,7 +219,7 @@ public class Main {
     }
 
     //Function to find index of people who FE'd
-    private static ArrayList<Integer> indexOfFEStudents(final ArrayList<Integer> attended, int FE) {
+    private static ArrayList<Integer> indexesOfFEs(final ArrayList<Integer> attended, int FE) {
 
         ArrayList<Integer> studentsWhoFE = new ArrayList<>();
         ArrayList<Integer> list = absencesLessHolder(attended, FE);
