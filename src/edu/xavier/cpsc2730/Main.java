@@ -13,6 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("\n=====  Welcome to the Attendance App  =====\n\n");
         //read user's name
         String username = readUserName();
         System.out.println("\n\nHello " + username + ". Welcome to my new Attendance App!\n");
