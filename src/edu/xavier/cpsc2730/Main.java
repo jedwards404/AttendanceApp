@@ -19,7 +19,7 @@ public class Main {
         String username = readUserName();
         System.out.println("\nHello, your name is " + username + "\n");
 
-        ArrayList<Integer> attended = initialize(username.length(), MAX_NUM_ABSENCES);
+        ArrayList<Integer> attended = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
         System.out.println("The elements are " + attended);
 
         ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
@@ -56,7 +56,7 @@ public class Main {
 
         //What are the names of the students with perfect attendance
         ArrayList<String> studentNames = buildListNames(uniqueNames, attended.size());
-        ArrayList<Integer> absences = initialize(username);
+        ArrayList<Integer> absences = initializeAbsences(username);
 
         ArrayList<String> answer = perfectAttendeesNames(studentNames, absences);
         System.out.println("The names of the students with perfect attendance are " + answer);
@@ -109,7 +109,7 @@ public class Main {
      * @param bound the upper bound of the random integers
      * @return the list of length random integers
      */
-    private static ArrayList<Integer> initialize(int length, int bound) {
+    private static ArrayList<Integer> initializeAbsences(int length, int bound) {
         Random rand = new Random();
         ArrayList<Integer> absences = new ArrayList<>();
         for (int i = 0; i < length; i++) {
