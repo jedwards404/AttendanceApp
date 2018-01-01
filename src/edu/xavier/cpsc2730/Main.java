@@ -71,7 +71,30 @@ public class Main {
         String name = buildListNames(names, numOfStudents).get(0);
         int answer3 = numOfCoursesFinder(buildListNames(names, numOfStudents), name);
         System.out.println("Student name: " + name + " has " + answer3 + " courses");
+
+        //How many courses does each student have? (using map)
+        ArrayList<String> elements = buildListNames(names, numOfStudents);
+        Map<String, Integer> answer4 = allStudentCourseFinder(elements);
+        System.out.println("The number of courses for all the students are : " + answer4);
+        for (String key : answer4.keySet())
+            System.out.println("Student : " + key + " Courses: " + answer4.get(key));
     }
+
+
+    private static Map<String, Integer> allStudentCourseFinder(ArrayList<String> elements) {
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < elements.size(); i++) {
+            String key = elements.get(i);
+            if (map.containsKey(key)) {
+                map.put(key, map.get(key) + 1);
+            } else {
+                map.put(key, 1);
+            }
+        }
+
+        return map;
+    }
+
 
     private static int numOfCoursesFinder(ArrayList<String> buildListNames, String name) {
         int answer3 = 0;
