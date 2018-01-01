@@ -62,9 +62,30 @@ public class Main {
         //What are the names of the students who FE'd some course
         ArrayList<String> answer2 = studentsWhoFEd(studentNames, absences);
         System.out.println("The names of the students who FE'd a course are " + answer2);
+
+        //How many courses does student [NAME] have?
+        String name = buildListNames(names, numOfStudents).get(0);
+        int answer3 = numOfCoursesFinder(buildListNames(names, numOfStudents), name);
+        System.out.println("Student name: " + name + " has " + answer3 + " courses");
     }
 
-    private static ArrayList<String> studentsWhoFEd(ArrayList<String> studentNames, ArrayList<Integer> absences) {
+    private static int numOfCoursesFinder(ArrayList<String> buildListNames, String name) {
+        int answer3 = 0;
+        for (int i = 0; i < buildListNames.size(); i = i + 1) {
+            if (buildListNames.contains(i) == buildListNames.contains(name)) {
+
+                answer3 = answer3 + 1;
+            }
+
+            return answer3;
+
+        }
+        return answer3;
+    }
+
+
+    private static ArrayList<String> studentsWhoFEd
+            (ArrayList<String> studentNames, ArrayList<Integer> absences) {
         ArrayList<String> answer2 = new ArrayList<>();
         for (int i = 0; i < absences.size(); i = i + 1) {
             if (absences.get(i) <= FE) {
@@ -75,7 +96,8 @@ public class Main {
     }
 
 
-    private static ArrayList<String> perfectAttendeesNames(ArrayList<String> studentNames, ArrayList<Integer> absences) {
+    private static ArrayList<String> perfectAttendeesNames
+            (ArrayList<String> studentNames, ArrayList<Integer> absences) {
         ArrayList<String> perfectAttendeesNames = new ArrayList<>();
         for (int i = 0; i < absences.size(); i = i + 1) {
             if (absences.get(i) == 0) {
