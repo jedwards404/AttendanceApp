@@ -128,16 +128,17 @@ public class Main {
     }
 
     /**
-     *  Return a list of length random integers in the range [0..bound]
+     * Return a list of length random integers in the range [0..bound]
+     *
      * @param length the number of integers to store in the list
-     * @param bound the upper bound of the random integers
+     * @param bound  the upper bound of the random integers
      * @return the list of length random integers
      */
     private static ArrayList<Integer> initializeAbsences(int length, int bound) {
         Random rand = new Random();
         ArrayList<Integer> absences = new ArrayList<>();
         for (int i = 0; i < length; i++) {
-            int genrandom = rand.nextInt(bound+1); // [0..bound]
+            int genrandom = rand.nextInt(bound + 1); // [0..bound]
             absences.add(genrandom);
         }
         return absences;
