@@ -20,10 +20,12 @@ public class Main {
         System.out.println("\nHello, your name is " + username + "\n");
 
         ArrayList<Integer> attended = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
-        System.out.println("The elements are " + attended);
+        System.out.println("\nThe elements are " + attended);
+
+        ArrayList<Integer> list = listOfPerfectAttendees(attended);
+        System.out.println("\n" + list + " had perfect attendance");
 
         ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
-        System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
         System.out.println("The average number of absences is " + averageFinder(attended));
         System.out.println("There are " + absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences and " + ((absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() / attended.size()) * 100) + " students with perfect attendance");
@@ -56,7 +58,7 @@ public class Main {
 
         //What are the names of the students with perfect attendance
         ArrayList<String> studentNames = buildListNames(uniqueNames, attended.size());
-        ArrayList<Integer> absences = initializeAbsences(username);
+        ArrayList<Integer> absences = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
 
         ArrayList<String> answer = perfectAttendeesNames(studentNames, absences);
         System.out.println("The names of the students with perfect attendance are " + answer);
