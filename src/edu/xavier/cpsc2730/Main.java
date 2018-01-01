@@ -5,7 +5,8 @@ import java.util.*;
 
 
 public class Main {
-    final static int minOfAbsences = 3;
+    final static int MIN_ALLOWED_ABSENCES = 3;
+    final static int MAX_NUM_ABSENCES = 10;
     final static int FE = 7;
     final static int X = 8;
     final static int Y = 4;
@@ -13,20 +14,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("\n=====  Welcome to the Attendance App  =====\n\n");
-        //read user's name
-        String username = readUserName();
-        System.out.println("\n\nHello " + username + ". Welcome to my new Attendance App!\n");
+        System.out.println("\n=====  Welcome to the Attendance App  =====\n");
 
-        //create ArrayList to find absences and put random numbers in an elements
-        ArrayList<Integer> attended = initialize(username);
-        ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
+        String username = readUserName();
+        System.out.println("\nHello, your name is " + username + "\n");
+
+        ArrayList<Integer> attended = initialize(username.length(), MAX_NUM_ABSENCES);
         System.out.println("The elements are " + attended);
+
+        ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
         System.out.println("There are " + listOfPerfectAttendees(attended) + " students with perfect attendance");
         System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
         System.out.println("The average number of absences is " + averageFinder(attended));
-        System.out.println("There are " + absencesLessHolder(attended, minOfAbsences).size() + " students with fewer than " + minOfAbsences + " absences and " + ((absencesLessHolder(attended, minOfAbsences).size() / attended.size()) * 100) + " students with perfect attendance");
-        System.out.println("The percent of students with less than " + minOfAbsences + " absences is " + percentOfAbsences(attended, minOfAbsences));
+        System.out.println("There are " + absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences and " + ((absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() / attended.size()) * 100) + " students with perfect attendance");
+        System.out.println("The percent of students with less than " + MIN_ALLOWED_ABSENCES + " absences is " + percentOfAbsences(attended, MIN_ALLOWED_ABSENCES));
         System.out.println("The students who FE'd are " + indexOfFEStudents(attended, FE));
         System.out.println(duplicateElementFinder(attended));
         System.out.println("uniques: " + uniqueElementFinder(attended));
@@ -103,11 +104,11 @@ public class Main {
     }
 
     // Function to make absences
-    private static ArrayList<Integer> initialize(String username) {
+    private static ArrayList<Integer> initialize(int length, int bound) {
         Random rand = new Random();
         ArrayList<Integer> absences = new ArrayList<>();
-        for (int i = 0; i < username.length(); i++) {
-            int genrandom = rand.nextInt(11);
+        for (int i = 0; i < length; i++) {
+            int genrandom = rand.nextInt(bound+1); // [0..bound]
             absences.add(genrandom);
         }
         return absences;
