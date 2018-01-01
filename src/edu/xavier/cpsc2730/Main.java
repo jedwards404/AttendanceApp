@@ -1,6 +1,7 @@
 package edu.xavier.cpsc2730;
 
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -91,6 +92,10 @@ public class Main {
         System.out.println("The number of courses for all the students are : " + answer4);
         for (String key : answer4.keySet())
             System.out.println("Student : " + key + " Courses: " + answer4.get(key));
+
+        //Generate today's date and output it
+        LocalDate today = LocalDate.now();
+        System.out.println("/n" + today);
     }
 
 
@@ -161,6 +166,7 @@ public class Main {
 
     /**
      * count of students who have perfect attendance
+     *
      * @param absences list of absences
      * @return the number of students who zero absences
      */
@@ -198,6 +204,7 @@ public class Main {
 
     /**
      * calculates the average of all absences
+     *
      * @param absences list of absences
      * @return the average
      */
@@ -223,8 +230,9 @@ public class Main {
 
     /**
      * calculates the percentage of student who FE'd
+     *
      * @param attended the lis tof students
-     * @param FE the number of absences that results in an FE
+     * @param FE       the number of absences that results in an FE
      * @return the percentage of students who have FE'd
      */
     private static double percentOfAbsences(final ArrayList<Integer> attended, int FE) {
