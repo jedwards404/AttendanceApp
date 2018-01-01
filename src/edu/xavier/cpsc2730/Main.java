@@ -25,9 +25,13 @@ public class Main {
         ArrayList<Integer> list = listOfPerfectAttendees(attended);
         System.out.println("\n" + list + " had perfect attendance");
 
+        int count = countPerfectAttendees(attended);
+        System.out.println("\nThere are " + count + " students with perfect attendance.");
+
+        double avg = averageAbsences(attended);
+        System.out.println("The average number of absences is " + avg);
+
         ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
-        System.out.println("There are " + countPerfectAttendees(attended) + " students with perfect attendance.");
-        System.out.println("The average number of absences is " + averageFinder(attended));
         System.out.println("There are " + absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences and " + ((absencesLessHolder(attended, MIN_ALLOWED_ABSENCES).size() / attended.size()) * 100) + " students with perfect attendance");
         System.out.println("The percent of students with less than " + MIN_ALLOWED_ABSENCES + " absences is " + percentOfAbsences(attended, MIN_ALLOWED_ABSENCES));
         System.out.println("The students who FE'd are " + indexOfFEStudents(attended, FE));
@@ -123,8 +127,13 @@ public class Main {
         return allUsed;
     }
 
-    private static int countPerfectAttendees(ArrayList<Integer> attended) {
-        return listOfPerfectAttendees(attended).size();
+    /**
+     * count of students who have perfect attendance
+     * @param absences list of absences
+     * @return the number of students who zero absences
+     */
+    private static int countPerfectAttendees(ArrayList<Integer> absences) {
+        return listOfPerfectAttendees(absences).size();
     }
 
     /**
@@ -155,13 +164,17 @@ public class Main {
         return perfectAttendees;
     }
 
-    //Function to find average of all absences
-    private static double averageFinder(final ArrayList<Integer> absenses) {
+    /**
+     * calculates the average of all absences
+     * @param absences list of absences
+     * @return the average
+     */
+    private static double averageAbsences(final ArrayList<Integer> absences) {
         double total = 0;
-        for (int i = 0; i < absenses.size(); i = i + 1) {
-            total = total + absenses.get(i);
+        for (int i = 0; i < absences.size(); i = i + 1) {
+            total = total + absences.get(i);
         }
-        total = total / absenses.size();
+        total = total / absences.size();
         return total;
     }
 
