@@ -45,13 +45,19 @@ public class Main {
         list = duplicates(attended);
         System.out.println("\nThe duplicates are " + list);
 
-        ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
-        System.out.println("uniques: " + uniqueElementFinder(attended));
-        System.out.println("The absences are " + numOfEachAbsenceValue(attended, countOfSameAbsenceValue));
-        shuffleAbsences(attended);
-        System.out.println("the shuffled absences are " + attended);
-        bubbleSort(attended);
-        System.out.println("The array when bubble sorted is " + attended);
+        list = uniqueAbsences(attended);
+        System.out.println("uniques: " + list);
+
+        Map<Integer, Integer> mapIntCount = numOfEachAbsenceValue(attended);
+        System.out.println("\nThe count of each absence value (value=count) is " + mapIntCount);
+
+        list = shuffleAbsences(attended);
+        System.out.println("\nthe shuffled absences are " + list);
+
+        // TODO fix bubbleSort so it properly returns "new memory"
+        list = bubbleSort(attended);
+        System.out.println("The array when bubble sorted is " + list);
+
         System.out.println("Your usernames are " + store5names());
         System.out.println("your shuffled usernames are " + shuffleUsernameHolder(store5names()));
         int numOfStudents = attended.size();
@@ -61,7 +67,7 @@ public class Main {
         ArrayList<String> names = store5names();
 
         // pull out the unique names
-        ArrayList<String> uniqueNames = findUniques(names);
+        ArrayList<String> uniqueNames = uniques(names);
         System.out.println("\nThe unique names are " + uniqueNames);
 
         //Were all five names used at least once
@@ -249,7 +255,12 @@ public class Main {
         return percentFinder;
     }
 
-    //Function to find index of people who FE'd
+    /**
+     * what are the indexes of students who FE'd
+     * @param attended the list of students
+     * @param FE the number of absences causing an FE
+     * @return the list of indexes of students who have FE'd
+     */
     private static ArrayList<Integer> indexesOfFEs(final ArrayList<Integer> attended, int FE) {
 
         ArrayList<Integer> studentsWhoFE = new ArrayList<>();
@@ -289,15 +300,31 @@ public class Main {
         return attended;
     }
 
-    //Function to shuffle the elements in the absences ArrayList
+    // TODO remove side effect in shuffleAbsences()
+    /**
+     * shuffle the provided list, side effect is the parameter is shuffled
+     * @param attended the list
+     * @return the shuffled lsit
+     */
     private static ArrayList<Integer> shuffleAbsences(final ArrayList<Integer> attended) {
+        // TODO don't assign objects in functions, instead make local copy
+        // ArrayList<Integer> temp = attended;  // DON'T DO THIS
+
+        // Notice I used the keyword "new" which means "new memory is used"
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.addAll(attended);
+
         for (int i = 0; i < attended.size(); i = i + 1) {
-            Collections.shuffle(attended);
+            Collections.shuffle(temp);
         }
-        return attended;
+        return temp;
     }
 
-    //Function to find duplicate elements in absences
+    /**
+     * What are the duplicates in the list
+     * @param attended the list
+     * @return the duplicates
+     */
     private static ArrayList<Integer> duplicates(final ArrayList<Integer> attended) {
         ArrayList<Integer> duplicateAbsenceValues = new ArrayList<>();
         for (int i = 0; i < attended.size(); i = i + 1) {
@@ -309,8 +336,12 @@ public class Main {
         return duplicateAbsenceValues;
     }
 
-    // function to return unique elements in attended
-    private static ArrayList<Integer> uniqueElementFinder(final ArrayList<Integer> array) {
+    /**
+     * what are the unique absence values, using a Set
+     * @param array the absences
+     * @return the list of unique absences
+     */
+    private static ArrayList<Integer> uniqueAbsences(final ArrayList<Integer> array) {
         ArrayList<Integer> uniques = new ArrayList<>();
         Set<Integer> uniquesSet = new HashSet<>();
 
@@ -324,28 +355,22 @@ public class Main {
         return uniques;
     }
 
-    /*
 
-    get unique elements
-    for each element in uniques
-        int count = countElement( element, attended );
-
-
-
-
+    /**
+     * count the number of each absence value, using a Map
+     * @param attended the list of absences
+     * @return the count of each absence value
      */
-
-    //function to return num of each absence value
-    private static Map<Integer, Integer> numOfEachAbsenceValue(final ArrayList<Integer> attended, ArrayList<Integer> countOfSameAbsenceValue) {
+    private static Map<Integer, Integer> numOfEachAbsenceValue(final ArrayList<Integer> attended) {
 
         Map<Integer, Integer> values = new HashMap<>();
-        for (int i = 0; i < attended.size(); i++) {
-            int key = attended.get(i);
+        for (int i = 0; i < attended.size(); i++) {     // for all the values in the list
+            int key = attended.get(i);                  // get an absence value, the key
 
-            if (values.containsKey(key)) {
-                values.put(key, values.get(key) + 1);
+            if (values.containsKey(key)) {              // if the list already has the key
+                values.put(key, values.get(key) + 1);   // increment the counter
             } else {
-                values.put(key, 1);
+                values.put(key, 1);                     // otherwise set the counter to 1
             }
         }
 
@@ -425,7 +450,7 @@ public class Main {
 //    }
 
     //
-    private static ArrayList<String> findUniques(ArrayList<String> list) {
+    private static ArrayList<String> uniques(ArrayList<String> list) {
         Set<String> listedUniques = new HashSet<>();
         ArrayList<String> uniques = new ArrayList<>();
 
