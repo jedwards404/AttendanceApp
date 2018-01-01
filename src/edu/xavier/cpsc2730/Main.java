@@ -41,7 +41,7 @@ public class Main {
         list = indexesOfFEs(attended, FE);
         System.out.println("The students who FE'd are at indexes " + list);
 
-        list = duplicateElementFinder(attended);
+        list = duplicates(attended);
         System.out.println("\nThe duplicates are " + list);
 
         ArrayList<Integer> countOfSameAbsenceValue = new ArrayList<>();
@@ -267,7 +267,7 @@ public class Main {
     }
 
     //Function to find duplicate elements in absences
-    private static ArrayList<Integer> duplicateElementFinder(final ArrayList<Integer> attended) {
+    private static ArrayList<Integer> duplicates(final ArrayList<Integer> attended) {
         ArrayList<Integer> duplicateAbsenceValues = new ArrayList<>();
         for (int i = 0; i < attended.size(); i = i + 1) {
             if (attended.lastIndexOf(attended.get(i)) != i) {
