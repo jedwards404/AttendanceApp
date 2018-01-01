@@ -1,7 +1,6 @@
 package edu.xavier.cpsc2730;
 
 
-import java.time.Clock;
 import java.util.*;
 
 
@@ -52,14 +51,29 @@ public class Main {
         boolean allFiveUsed = allNamesUsed(usedNames, uniqueNames);
         System.out.println("\nWere all the names were used? " + allNamesUsed(usedNames, uniqueNames));
 
+
         //What are the names of the students with perfect attendance
         ArrayList<String> studentNames = buildListNames(uniqueNames, attended.size());
         ArrayList<Integer> absences = initialize(username);
 
         ArrayList<String> answer = perfectAttendeesNames(studentNames, absences);
-        System.out.println("The names of students with perfect attendance are " + answer);
+        System.out.println("The names of the students with perfect attendance are " + answer);
 
+        //What are the names of the students who FE'd some course
+        ArrayList<String> answer2 = studentsWhoFEd(studentNames, absences);
+        System.out.println("The names of the students who FE'd a course are " + answer2);
     }
+
+    private static ArrayList<String> studentsWhoFEd(ArrayList<String> studentNames, ArrayList<Integer> absences) {
+        ArrayList<String> answer2 = new ArrayList<>();
+        for (int i = 0; i < absences.size(); i = i + 1) {
+            if (absences.get(i) <= FE) {
+                answer2.add(studentNames.get(i));
+            }
+        }
+        return answer2;
+    }
+
 
     private static ArrayList<String> perfectAttendeesNames(ArrayList<String> studentNames, ArrayList<Integer> absences) {
         ArrayList<String> perfectAttendeesNames = new ArrayList<>();
