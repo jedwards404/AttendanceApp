@@ -103,7 +103,12 @@ public class Main {
         return listOfPerfectAttendees(attended).size();
     }
 
-    // Function to make absences
+    /**
+     *  Return a list of length random integers in the range [0..bound]
+     * @param length the number of integers to store in the list
+     * @param bound the upper bound of the random integers
+     * @return the list of length random integers
+     */
     private static ArrayList<Integer> initialize(int length, int bound) {
         Random rand = new Random();
         ArrayList<Integer> absences = new ArrayList<>();
