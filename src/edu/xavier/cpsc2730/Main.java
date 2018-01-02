@@ -114,6 +114,8 @@ public class Main {
         System.out.println("today's month is " + today.getMonth());
         System.out.println("Joshua's birth date is " + LocalDate.of(1996, 10, 7));
         System.out.println("Joshua's birth date is " + LocalDate.of(1996, Month.OCTOBER, 7));
+
+        //output the number of days I have been alive
         LocalDate joshuaBirthday = LocalDate.of(1996, Month.OCTOBER, 7);
         long answer1 = joshuaBirthday.toEpochDay();
         long answer2 = today.toEpochDay();
@@ -130,7 +132,14 @@ public class Main {
         System.out.println("\ntoday is " + todayTime);
         System.out.println("today is " + todayTime.format(DateTimeFormatter.ofPattern("yyyy MM dd  hh:ss")));
 
-        //output the number of days I have been alive
+        //store today's date
+        LocalDate currentDate = LocalDate.now();
+        System.out.println("today is " + currentDate.format(DateTimeFormatter.ofPattern("yyyy MM dd")));
+
+        //birthday plus # long days compared to current date
+        System.out.println(joshuaBirthday.plusDays(answer3));
+        System.out.println(joshuaBirthday.plusDays(answer3).equals(currentDate));
+
 
     }
 
