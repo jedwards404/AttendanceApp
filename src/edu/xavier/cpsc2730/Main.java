@@ -2,6 +2,9 @@ package edu.xavier.cpsc2730;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 
 
@@ -12,19 +15,24 @@ public class Main {
     final static int X = 8;
     final static int Y = 4;
 
+    final static Random rand = new Random();
 
     public static void main(String[] args) {
 
+        int sprintNum = 1;
+
         System.out.println("\n=====  Welcome to the Attendance App  =====\n");
 
+
+        System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
         String username = readUserName();
         System.out.println("\nHello, your name is " + username + "\n");
 
         ArrayList<Integer> attended = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
         System.out.println("\nThe absences are " + attended);
 
-        ArrayList<Integer> list = listOfPerfectAttendees(attended);
-        System.out.println("\nStudents " + list + " had perfect attendance");
+        ArrayList<Integer> listOfIntegers = listOfPerfectAttendees(attended);
+        System.out.println("\nStudents at indexes " + listOfIntegers + " had perfect attendance");
 
         int count = countPerfectAttendees(attended);
         System.out.println("There are " + count + " students with perfect attendance.");
@@ -33,75 +41,84 @@ public class Main {
         System.out.println("The average number of absences is " + avg);
 
         // TODO change name of absencesLessHolder to something more descriptive
-        list = absencesLessHolder(attended, MIN_ALLOWED_ABSENCES);
-        System.out.println("There are " + list.size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences.");
+        listOfIntegers = absencesLessHolder(attended, MIN_ALLOWED_ABSENCES);
+        System.out.println("There are " + listOfIntegers.size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences.");
 
         avg = percentOfAbsences(attended, MIN_ALLOWED_ABSENCES);
         System.out.println("The percent of students with fewer than " + MIN_ALLOWED_ABSENCES + " absences is " + avg);
 
-        list = indexesOfFEs(attended, FE);
-        System.out.println("The students who FE'd are at indexes " + list);
+        listOfIntegers = indexesOfFEs(attended, FE);
+        System.out.println("The students who FE'd are at indexes " + listOfIntegers);
 
-        list = duplicates(attended);
-        System.out.println("\nThe duplicates are " + list);
 
-        list = uniqueAbsences(attended);
-        System.out.println("uniques: " + list);
+        System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
+        System.out.println("\nthe absences are                    " + attended);
+        listOfIntegers = duplicates(attended);
+        System.out.println("The values that are duplicated:     " + listOfIntegers);
 
+        listOfIntegers = uniqueAbsences(attended);
+        System.out.println("the values with duplicates removed: " + listOfIntegers);
+
+
+        System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
         Map<Integer, Integer> mapIntCount = numOfEachAbsenceValue(attended);
         System.out.println("\nThe count of each absence value (value=count) is " + mapIntCount);
 
-        list = shuffleAbsences(attended);
-        System.out.println("\nthe shuffled absences are " + list);
+        listOfIntegers = shuffleAbsences(attended);
+        System.out.println("\nthe shuffled absences are       " + listOfIntegers);
 
         // TODO fix bubbleSort so it properly returns "new memory"
-        list = bubbleSort(attended);
-        System.out.println("The array when bubble sorted is " + list);
+        //list = bubbleSort(attended);
+        System.out.println("The array when bubble sorted is " + listOfIntegers);
 
-        System.out.println("Your usernames are " + store5names());
-        System.out.println("your shuffled usernames are " + shuffleUsernameHolder(store5names()));
-        int numOfStudents = attended.size();
-        System.out.println("usernames for array size of attended are " + buildListNames(store5names(), numOfStudents));
 
-        // create an ArrayList of names
+        System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
         ArrayList<String> names = store5names();
+        names = shuffleNames(names);
+        names = buildListNames(store5names(), attended.size());
 
-        // pull out the unique names
+        // TODO look at System.out.printf()
+        System.out.printf("\n%2s \t %10s \t %2s\n", "i", "names", "absences");
+        for (int i = 0; i < names.size(); i++) {
+            System.out.printf("%2d \t %10s \t %2d\n", i, names.get(i),attended.get(i));
+        }
+
         ArrayList<String> uniqueNames = uniques(names);
         System.out.println("\nThe unique names are " + uniqueNames);
 
-        //Were all five names used at least once
-        ArrayList<String> usedNames = store5names();
-        boolean allFiveUsed = allNamesUsed(usedNames, uniqueNames);
-        System.out.println("\nWere all the names were used? " + allNamesUsed(usedNames, uniqueNames));
+        boolean allFiveUsed = allNamesUsed(names, uniqueNames);
+        System.out.println("Were all the names used? " + allFiveUsed);
 
 
-        //What are the names of the students with perfect attendance
-        ArrayList<String> studentNames = buildListNames(uniqueNames, attended.size());
-        ArrayList<Integer> absences = initializeAbsences(username.length(), MAX_NUM_ABSENCES);
+        System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
+        ArrayList<String> listOfStrings = perfectAttendeesNames(names, attended);
+        System.out.println("\nThe names of the students with perfect attendance are " + listOfStrings);
 
-        ArrayList<String> answer = perfectAttendeesNames(studentNames, absences);
-        System.out.println("The names of the students with perfect attendance are " + answer);
+        listOfStrings = studentsWhoFEd(names, attended);
+        System.out.println("The names of the students who FE'd a course are " + listOfStrings);
 
-        //What are the names of the students who FE'd some course
-        ArrayList<String> answer2 = studentsWhoFEd(studentNames, absences);
-        System.out.println("The names of the students who FE'd a course are " + answer2);
-
-        //How many courses does student [NAME] have?
-        String name = buildListNames(names, numOfStudents).get(0);
-        int answer3 = numOfCoursesFinder(buildListNames(names, numOfStudents), name);
-        System.out.println("Student name: " + name + " has " + answer3 + " courses");
+        String name = names.get(rand.nextInt(names.size()));
+        int num = numOfCoursesFinder(buildListNames(names, attended.size()), name);
+        System.out.println("\nStudent name: " + name + " has " + num + " courses");
 
         //How many courses does each student have? (using map)
-        ArrayList<String> elements = buildListNames(names, numOfStudents);
-        Map<String, Integer> answer4 = allStudentCourseFinder(elements);
-        System.out.println("The number of courses for all the students are : " + answer4);
-        for (String key : answer4.keySet())
-            System.out.println("Student : " + key + " Courses: " + answer4.get(key));
+        listOfStrings = buildListNames(names, attended.size());
+        Map<String, Integer> map = allStudentCourseFinder(listOfStrings);
+        System.out.println("\nThe number of courses for all the students are : " + map);
+        for (String key : map.keySet())
+            System.out.println("Student : " + key + " Courses: " + map.get(key));
 
-        //Generate today's date and output it
+
+        System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
         LocalDate today = LocalDate.now();
-        System.out.println("/n" + today);
+        System.out.println("today is " + today);
+        System.out.println("today is " + today.format(DateTimeFormatter.ofPattern("yyyy MM dd")));
+        System.out.println("today's month is " + today.getMonth());
+
+        LocalDateTime todayTime = LocalDateTime.now();
+        System.out.println("\ntoday is " + todayTime);
+        System.out.println("today is " + todayTime.format(DateTimeFormatter.ofPattern("yyyy MM dd  hh:ss")));
+
     }
 
 
@@ -245,7 +262,7 @@ public class Main {
         double percentFinder;
         int denominator = absencesLessHolder(attended, FE).size();
         if (denominator != 0) {
-            percentFinder = (double) (listOfPerfectAttendees(attended).size() / denominator * 100);
+            percentFinder = (double) absencesLessHolder(attended, FE).size() / attended.size() * 100;
         } else {
             return 0;
 
@@ -333,7 +350,7 @@ public class Main {
             }
 
         }
-        return duplicateAbsenceValues;
+        return uniqueAbsences(duplicateAbsenceValues);
     }
 
     /**
@@ -411,7 +428,7 @@ public class Main {
     }
 
     //function to shuffle the name using a user-defined shuffle function
-    private static ArrayList<String> shuffleUsernameHolder(ArrayList<String> usernameHolder) {
+    private static ArrayList<String> shuffleNames(ArrayList<String> usernameHolder) {
         Random random = new Random(usernameHolder.size());
         random.setSeed(System.nanoTime());
 
