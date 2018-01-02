@@ -22,7 +22,7 @@ public class Main {
 
         System.out.println("\n=====  Welcome to the Attendance App  =====\n");
 
-        // TODO difference between i++ and ++i
+        // todoTODO difference between i++ and ++i
         System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
         String username = readUserName();
         System.out.println("\nHello, your name is " + username + "\n");
@@ -40,7 +40,7 @@ public class Main {
         System.out.println("The average number of absences is " + avg);
 
         // TODO change name of absencesLessHolder to something more descriptive
-        listOfIntegers = absencesLessHolder(attended, MIN_ALLOWED_ABSENCES);
+        listOfIntegers = absencesLessThan(attended, MIN_ALLOWED_ABSENCES);
         System.out.println("There are " + listOfIntegers.size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences.");
 
         avg = percentOfAbsences(attended, MIN_ALLOWED_ABSENCES);
@@ -66,8 +66,8 @@ public class Main {
         listOfIntegers = shuffleAbsences(attended);
         System.out.println("\nthe shuffled absences are       " + listOfIntegers);
 
-        // TODO fix bubbleSort so it properly returns "new memory"
-        //list = bubbleSort(attended);
+        // todoTODO fix bubbleSort so it properly returns "new memory"
+        listOfIntegers = bubbleSort(attended);
         System.out.println("The array when bubble sorted is " + listOfIntegers);
 
 
@@ -76,10 +76,9 @@ public class Main {
         names = shuffleNames(names);
         names = buildListNames(store5names(), attended.size());
 
-        // TODO look at System.out.printf()
         System.out.printf("\n%2s \t %10s \t %2s\n", "i", "names", "absences");
         for (int i = 0; i < names.size(); i++) {
-            System.out.printf("%2d \t %10s \t %2d\n", i, names.get(i),attended.get(i));
+            System.out.printf("%2d \t %10s \t %2d\n", i, names.get(i), attended.get(i));
         }
 
         ArrayList<String> uniqueNames = uniques(names);
@@ -123,8 +122,8 @@ public class Main {
     // TODO replace all fori loops, that you can, with equivalent enhanced-for loops
     private static Map<String, Integer> allStudentCourseFinder(ArrayList<String> elements) {
         Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < elements.size(); i++) {
-            String key = elements.get(i);
+        for (String key : elements) {
+
             if (map.containsKey(key)) {
                 map.put(key, map.get(key) + 1);
             } else {
@@ -132,14 +131,16 @@ public class Main {
             }
         }
 
+
         return map;
     }
 
 
     private static int numOfCoursesFinder(ArrayList<String> buildListNames, String name) {
+        //todo numOfCoursesFinder() has an error
         int answer = 0;
         for (int i = 0; i < buildListNames.size(); i++) {
-            if (buildListNames.contains(i) == buildListNames.contains(name)) {
+            if (buildListNames.contains(buildListNames.get(i)) == buildListNames.contains(name)) {
 
                 answer++;
             }
@@ -180,8 +181,7 @@ public class Main {
         for (int i = 0; i < usedNames.size(); i++) {
             allUsed = uniqueNames.contains(usedNames.get(i));
 
-            // TODO replace all conditions with [something]==false with ![something]
-            if (allUsed == false) {
+            if (!allUsed) {
                 return false;
             }
         }
@@ -242,7 +242,7 @@ public class Main {
     }
 
     //Function to find people who have less than some # of absences
-    private static ArrayList<Integer> absencesLessHolder(final ArrayList<Integer> absences, int FE) {
+    private static ArrayList<Integer> absencesLessThan(final ArrayList<Integer> absences, int FE) {
         ArrayList<Integer> absencesCalcHolder = new ArrayList<>();
         for (int i = 0; i < absences.size(); i++) {
             if (absences.get(i) < FE) {
@@ -261,9 +261,9 @@ public class Main {
      */
     private static double percentOfAbsences(final ArrayList<Integer> attended, int FE) {
         double percentFinder;
-        int denominator = absencesLessHolder(attended, FE).size();
+        int denominator = absencesLessThan(attended, FE).size();
         if (denominator != 0) {
-            percentFinder = (double) absencesLessHolder(attended, FE).size() / attended.size() * 100;
+            percentFinder = (double) absencesLessThan(attended, FE).size() / attended.size() * 100;
         } else {
             return 0;
 
@@ -275,14 +275,15 @@ public class Main {
 
     /**
      * what are the indexes of students who FE'd
+     *
      * @param attended the list of students
-     * @param FE the number of absences causing an FE
+     * @param FE       the number of absences causing an FE
      * @return the list of indexes of students who have FE'd
      */
     private static ArrayList<Integer> indexesOfFEs(final ArrayList<Integer> attended, int FE) {
 
         ArrayList<Integer> studentsWhoFE = new ArrayList<>();
-        ArrayList<Integer> list = absencesLessHolder(attended, FE);
+        ArrayList<Integer> list = absencesLessThan(attended, FE);
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) < FE) {
                 studentsWhoFE.add(i);
@@ -310,7 +311,13 @@ public class Main {
 
     }
 
-    //Function to sort absences array using library function
+    /**
+     * this function sorts the absences
+     *
+     * @param attended this is the absence arrayList
+     * @return sorted list of absences
+     */
+
     private static ArrayList<Integer> sortAbsences(final ArrayList<Integer> attended) {
         for (int i = 0; i < attended.size(); i++) {
             Collections.sort(attended);
@@ -318,14 +325,14 @@ public class Main {
         return attended;
     }
 
-    // TODO remove side effect in shuffleAbsences()
+
     /**
      * shuffle the provided list, side effect is the parameter is shuffled
+     *
      * @param attended the list
      * @return the shuffled lsit
      */
     private static ArrayList<Integer> shuffleAbsences(final ArrayList<Integer> attended) {
-        // TODO don't assign objects in functions, instead make local copy
         // ArrayList<Integer> temp = attended;  // DON'T DO THIS
 
         // Notice I used the keyword "new" which means "new memory is used"
@@ -340,6 +347,7 @@ public class Main {
 
     /**
      * What are the duplicates in the list
+     *
      * @param attended the list
      * @return the duplicates
      */
@@ -356,6 +364,7 @@ public class Main {
 
     /**
      * what are the unique absence values, using a Set
+     *
      * @param array the absences
      * @return the list of unique absences
      */
@@ -366,8 +375,7 @@ public class Main {
         for (int i = 0; i < array.size(); i++) {
             int num = array.get(i);
 
-            // TODO replace all conditions with [something]==true with [something]
-            if (uniquesSet.add(num) == true) {
+            if (uniquesSet.add(num)) {
                 uniques.add(num);
             }
         }
@@ -378,6 +386,7 @@ public class Main {
 
     /**
      * count the number of each absence value, using a Map
+     *
      * @param attended the list of absences
      * @return the count of each absence value
      */
@@ -404,17 +413,19 @@ public class Main {
     }
 
     //function to use bubble sort (takes ArrayList and takes void)
-    private static void bubbleSort(ArrayList<Integer> attended) {
-        for (int i = 0; i < attended.size(); i++) {
-            for (int j = i; j < attended.size(); j++) {
-                if (attended.get(i) > attended.get(j)) {
+    private static ArrayList<Integer> bubbleSort(ArrayList<Integer> attended) {
+        ArrayList<Integer> temp = new ArrayList<>(attended);
+        for (int i = 0; i < temp.size(); i++) {
+            for (int j = i; j < temp.size(); j++) {
+                if (temp.get(i) > temp.get(j)) {
                     //swap
-                    int temp = attended.get(i);
-                    attended.set(i, attended.get(j));
-                    attended.set(j, temp);
+                    int tempNum = temp.get(i);
+                    temp.set(i, temp.get(j));
+                    temp.set(j, tempNum);
                 }
             }
         }
+        return temp;
     }
 
 
