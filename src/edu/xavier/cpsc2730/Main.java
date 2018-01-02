@@ -4,7 +4,6 @@ package edu.xavier.cpsc2730;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
 
 
@@ -23,7 +22,7 @@ public class Main {
 
         System.out.println("\n=====  Welcome to the Attendance App  =====\n");
 
-
+        // TODO difference between i++ and ++i
         System.out.println("\n>>>>>>>>>>  Sprint #" + (sprintNum++) + "\n");
         String username = readUserName();
         System.out.println("\nHello, your name is " + username + "\n");
@@ -121,7 +120,7 @@ public class Main {
 
     }
 
-
+    // TODO replace all fori loops, that you can, with equivalent enhanced-for loops
     private static Map<String, Integer> allStudentCourseFinder(ArrayList<String> elements) {
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < elements.size(); i++) {
@@ -138,24 +137,24 @@ public class Main {
 
 
     private static int numOfCoursesFinder(ArrayList<String> buildListNames, String name) {
-        int answer3 = 0;
-        for (int i = 0; i < buildListNames.size(); i = i + 1) {
+        int answer = 0;
+        for (int i = 0; i < buildListNames.size(); i++) {
             if (buildListNames.contains(i) == buildListNames.contains(name)) {
 
-                answer3 = answer3 + 1;
+                answer++;
             }
 
-            return answer3;
+            return answer;
 
         }
-        return answer3;
+        return answer;
     }
 
 
     private static ArrayList<String> studentsWhoFEd
             (ArrayList<String> studentNames, ArrayList<Integer> absences) {
         ArrayList<String> answer2 = new ArrayList<>();
-        for (int i = 0; i < absences.size(); i = i + 1) {
+        for (int i = 0; i < absences.size(); i++) {
             if (absences.get(i) <= FE) {
                 answer2.add(studentNames.get(i));
             }
@@ -167,7 +166,7 @@ public class Main {
     private static ArrayList<String> perfectAttendeesNames
             (ArrayList<String> studentNames, ArrayList<Integer> absences) {
         ArrayList<String> perfectAttendeesNames = new ArrayList<>();
-        for (int i = 0; i < absences.size(); i = i + 1) {
+        for (int i = 0; i < absences.size(); i++) {
             if (absences.get(i) == 0) {
                 perfectAttendeesNames.add(studentNames.get(i));
             }
@@ -178,8 +177,10 @@ public class Main {
 
     private static boolean allNamesUsed(ArrayList<String> usedNames, ArrayList<String> uniqueNames) {
         boolean allUsed = false;
-        for (int i = 0; i < usedNames.size(); i = i + 1) {
+        for (int i = 0; i < usedNames.size(); i++) {
             allUsed = uniqueNames.contains(usedNames.get(i));
+
+            // TODO replace all conditions with [something]==false with ![something]
             if (allUsed == false) {
                 return false;
             }
@@ -217,7 +218,7 @@ public class Main {
     //Function to find perfect attendees
     private static ArrayList<Integer> listOfPerfectAttendees(final ArrayList<Integer> attended) {
         ArrayList<Integer> perfectAttendees = new ArrayList<>();
-        for (int i = 0; i < attended.size(); i = i + 1) {
+        for (int i = 0; i < attended.size(); i++) {
             if (attended.get(i) == 0) {
                 perfectAttendees.add(i);
             }
@@ -233,7 +234,7 @@ public class Main {
      */
     private static double averageAbsences(final ArrayList<Integer> absences) {
         double total = 0;
-        for (int i = 0; i < absences.size(); i = i + 1) {
+        for (int i = 0; i < absences.size(); i++) {
             total = total + absences.get(i);
         }
         total = total / absences.size();
@@ -243,7 +244,7 @@ public class Main {
     //Function to find people who have less than some # of absences
     private static ArrayList<Integer> absencesLessHolder(final ArrayList<Integer> absences, int FE) {
         ArrayList<Integer> absencesCalcHolder = new ArrayList<>();
-        for (int i = 0; i < absences.size(); i = i + 1) {
+        for (int i = 0; i < absences.size(); i++) {
             if (absences.get(i) < FE) {
                 absencesCalcHolder.add(absences.get(i));
             }
@@ -282,7 +283,7 @@ public class Main {
 
         ArrayList<Integer> studentsWhoFE = new ArrayList<>();
         ArrayList<Integer> list = absencesLessHolder(attended, FE);
-        for (int i = 0; i < list.size(); i = i + 1) {
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i) < FE) {
                 studentsWhoFE.add(i);
             }
@@ -293,7 +294,7 @@ public class Main {
 
     //Function to add value [X] to absence greater than [Y]
     private static ArrayList<Integer> changeElementYbyX(final ArrayList<Integer> attended, int X, int Y) {
-        for (int i = 0; i < attended.size(); i = i + 1) {
+        for (int i = 0; i < attended.size(); i++) {
             if (attended.get(i) < Y) {
                 attended.set(X, i);
                 // example int num = attended.get(i < Y ? 5:2);
@@ -311,7 +312,7 @@ public class Main {
 
     //Function to sort absences array using library function
     private static ArrayList<Integer> sortAbsences(final ArrayList<Integer> attended) {
-        for (int i = 0; i < attended.size(); i = i + 1) {
+        for (int i = 0; i < attended.size(); i++) {
             Collections.sort(attended);
         }
         return attended;
@@ -331,7 +332,7 @@ public class Main {
         ArrayList<Integer> temp = new ArrayList<>();
         temp.addAll(attended);
 
-        for (int i = 0; i < attended.size(); i = i + 1) {
+        for (int i = 0; i < attended.size(); i++) {
             Collections.shuffle(temp);
         }
         return temp;
@@ -344,7 +345,7 @@ public class Main {
      */
     private static ArrayList<Integer> duplicates(final ArrayList<Integer> attended) {
         ArrayList<Integer> duplicateAbsenceValues = new ArrayList<>();
-        for (int i = 0; i < attended.size(); i = i + 1) {
+        for (int i = 0; i < attended.size(); i++) {
             if (attended.lastIndexOf(attended.get(i)) != i) {
                 duplicateAbsenceValues.add(attended.get(i));
             }
@@ -362,8 +363,10 @@ public class Main {
         ArrayList<Integer> uniques = new ArrayList<>();
         Set<Integer> uniquesSet = new HashSet<>();
 
-        for (int i = 0; i < array.size(); i = i + 1) {
+        for (int i = 0; i < array.size(); i++) {
             int num = array.get(i);
+
+            // TODO replace all conditions with [something]==true with [something]
             if (uniquesSet.add(num) == true) {
                 uniques.add(num);
             }
@@ -471,7 +474,7 @@ public class Main {
         Set<String> listedUniques = new HashSet<>();
         ArrayList<String> uniques = new ArrayList<>();
 
-        for (int i = 0; i < store5names().size(); i = i + 1) {
+        for (int i = 0; i < store5names().size(); i++) {
             listedUniques.add(store5names().get(i));
 
         }
