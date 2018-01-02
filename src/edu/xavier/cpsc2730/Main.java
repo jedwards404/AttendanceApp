@@ -39,7 +39,6 @@ public class Main {
         double avg = averageAbsences(attended);
         System.out.println("The average number of absences is " + avg);
 
-        // TODO change name of absencesLessHolder to something more descriptive
         listOfIntegers = absencesLessThan(attended, MIN_ALLOWED_ABSENCES);
         System.out.println("There are " + listOfIntegers.size() + " students with fewer than " + MIN_ALLOWED_ABSENCES + " absences.");
 
@@ -119,7 +118,6 @@ public class Main {
 
     }
 
-    // TODO replace all fori loops, that you can, with equivalent enhanced-for loops
     private static Map<String, Integer> allStudentCourseFinder(ArrayList<String> elements) {
         Map<String, Integer> map = new HashMap<>();
         for (String key : elements) {
