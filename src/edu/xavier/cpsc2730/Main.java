@@ -3,6 +3,7 @@ package edu.xavier.cpsc2730;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -111,10 +112,19 @@ public class Main {
         System.out.println("today is " + today);
         System.out.println("today is " + today.format(DateTimeFormatter.ofPattern("yyyy MM dd")));
         System.out.println("today's month is " + today.getMonth());
+        System.out.println("Joshua's birth date is " + LocalDate.of(1996, 10, 7));
+        System.out.println("Joshua's birth date is " + LocalDate.of(1996, Month.OCTOBER, 7));
+        LocalDate joshuaBirthday = LocalDate.of(1996, Month.OCTOBER, 7);
+        long answer1 = joshuaBirthday.toEpochDay();
+        long answer2 = today.toEpochDay();
+        long answer3 = answer2 - answer1;
+        System.out.println("I have been alive " + answer3 + " days");
 
         LocalDateTime todayTime = LocalDateTime.now();
         System.out.println("\ntoday is " + todayTime);
         System.out.println("today is " + todayTime.format(DateTimeFormatter.ofPattern("yyyy MM dd  hh:ss")));
+
+        //output the number of days I have been alive
 
     }
 
