@@ -120,6 +120,12 @@ public class Main {
         long answer3 = answer2 - answer1;
         System.out.println("I have been alive " + answer3 + " days");
 
+        LocalDate birthdate = LocalDate.of(1962, 7, 24);
+        System.out.println("\nAndrea's birthdate is " + birthdate);
+
+        long daysAlive = today.toEpochDay() - birthdate.toEpochDay();
+        System.out.println("Andrea's been alive " + daysAlive + " days.");
+
         LocalDateTime todayTime = LocalDateTime.now();
         System.out.println("\ntoday is " + todayTime);
         System.out.println("today is " + todayTime.format(DateTimeFormatter.ofPattern("yyyy MM dd  hh:ss")));
