@@ -143,13 +143,48 @@ public class Main {
         //add dates til list has same num as names list
         ArrayList<String> nameList = buildListNames(names, attended.size());
         ArrayList<LocalDate> dates = datesForNamesList(nameList, currentDate);
+
+        //names of students with fewest absences
+        ArrayList<Integer> absences = attended;
+        nameList = buildListNames(names, attended.size());
+        table(nameList, dates, attended);
+
+
+        ArrayList<String> answer = minAbsenceNames(absences, nameList);
+        System.out.println("The student with the lowest num of absences is " + answer);
+
+
+    }
+
+    private static void table(ArrayList<String> nameList, ArrayList<LocalDate> dates, ArrayList<Integer> attended) {
         System.out.println("The dates to go with names are \n Index \t\tName \t\tDate \t\tAbsences");
         for (int i = 0; i < nameList.size(); i = i + 1) {
 
             System.out.printf("%4d\t %10s \t %10s \t %5d\n", i, nameList.get(i), dates.get(i), attended.get(i));
         }
+    }
 
+    private static int minAbsenceNum(ArrayList<Integer> absences) {
+        int i = 0;
+        int minAbsences = absences.get(0);
+        for (i = 0; i < absences.size(); i++) {
+            if (minAbsences > absences.get(i)) {
+                minAbsences = absences.get(i);
+            }
 
+        }
+        return minAbsences;
+    }
+
+    private static ArrayList<String> minAbsenceNames(ArrayList<Integer> absences, ArrayList<String> nameList) {
+        ArrayList<String> answer = new ArrayList<>();
+        int minNum = minAbsenceNum(absences);
+        for (int i = 0; i < absences.size(); i++) {
+            if (minNum == absences.get(i)) {
+                answer.add(nameList.get(i));
+            }
+        }
+        return answer;
     }
 
     private static ArrayList<LocalDate> datesForNamesList(ArrayList<String> nameList, LocalDate currentDate) {
