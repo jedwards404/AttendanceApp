@@ -151,7 +151,7 @@ public class Main {
 
 
         ArrayList<String> answer = minAbsenceNames(absences, nameList);
-        System.out.println("The student with the lowest num of absences is " + answer);
+        System.out.println("\nThe student with the lowest num of absences is " + answer);
 
 
     }
@@ -190,8 +190,8 @@ public class Main {
     private static ArrayList<LocalDate> datesForNamesList(ArrayList<String> nameList, LocalDate currentDate) {
         Random random = new Random();
         ArrayList<LocalDate> answer = new ArrayList<>();
-        for (int i = 0; i < nameList.size(); i = i + 1) {
-            answer.add(currentDate.minusDays(random.nextLong() % 21));
+        for (int i = 0; i < nameList.size(); i++) {
+            answer.add(currentDate.minusDays(random.nextLong() % 21)); // TODO Why should 21 be a parameter?
         }
         return answer;
     }
