@@ -140,7 +140,25 @@ public class Main {
         System.out.println(joshuaBirthday.plusDays(answer3));
         System.out.println(joshuaBirthday.plusDays(answer3).equals(currentDate));
 
+        //add dates til list has same num as names list
+        ArrayList<String> nameList = buildListNames(names, attended.size());
+        ArrayList<LocalDate> dates = datesForNamesList(nameList, currentDate);
+        System.out.println("The dates to go with names are \n Index \t\tName \t\tDate \t\tAbsences");
+        for (int i = 0; i < nameList.size(); i = i + 1) {
 
+            System.out.printf("%4d\t %10s \t %10s \t %5d\n", i, nameList.get(i), dates.get(i), attended.get(i));
+        }
+
+
+    }
+
+    private static ArrayList<LocalDate> datesForNamesList(ArrayList<String> nameList, LocalDate currentDate) {
+        Random random = new Random();
+        ArrayList<LocalDate> answer = new ArrayList<>();
+        for (int i = 0; i < nameList.size(); i = i + 1) {
+            answer.add(currentDate.minusDays(random.nextLong() % 21));
+        }
+        return answer;
     }
 
     private static Map<String, Integer> allStudentCourseFinder(ArrayList<String> elements) {
