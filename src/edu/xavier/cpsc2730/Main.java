@@ -157,37 +157,34 @@ public class Main {
         //names of the students who have the longest number of days since last absence
         names = listOfStrings;
         dates = dates;
-        int intLongestSinceAbsence = intLongestSinceAbsence(dates, currentDate);
-        ArrayList<String> answernames = nameLongestSinceAbsence(names, intLongestSinceAbsence, dates);
+        LocalDate earliestDate = earliestDate(dates);
+        ArrayList<String> answernames = earliestDateName(names, earliestDate, dates);
 
-        System.out.println("The names are " + names);
+        System.out.println("\nThe names are " + names);
         System.out.println("The dates are " + dates);
         System.out.println("The current date is " + currentDate);
-        System.out.println(intLongestSinceAbsence);
-        System.out.println(answernames);
-        System.out.println("The names of the students with the longest number of days since last absence were : " + answernames);
+        System.out.println("The earliest date is " + earliestDate);
+        System.out.println("The student with the longest time since a absence is " + answernames);
+        System.out.println("The names of the students with the longest number of days since last absence was : " + answernames + "\n");
 
 
     }
 
-    private static int intLongestSinceAbsence(ArrayList<LocalDate> dates, LocalDate currentDate) {
+    private static LocalDate earliestDate(ArrayList<LocalDate> dates) {
         LocalDate longestDate = dates.get(0);
         for (int i = 0; i < dates.size(); i++) {
-            if (longestDate.compareTo(dates.get(i)) > 0) {
+            if (longestDate.compareTo(dates.get(i)) < 0) {
                 longestDate = dates.get(i);
             }
 
         }
-        int answer = longestDate.compareTo(currentDate);
-        return answer;
+        return longestDate;
     }
 
-    private static ArrayList<String> nameLongestSinceAbsence(ArrayList<String> names, int intLongestSinceAbsence, ArrayList<LocalDate> dates) {
+    private static ArrayList<String> earliestDateName(ArrayList<String> names, LocalDate earliestDate, ArrayList<LocalDate> dates) {
         ArrayList<String> answer = new ArrayList<>();
-        LocalDate longestDate = dates.get(0);
-        LocalDate currentDate = LocalDate.now();
         for (int i = 0; i < dates.size(); i++) {
-            if (intLongestSinceAbsence == dates.get(i).compareTo(currentDate)) {
+            if (earliestDate.equals(dates.get(i))) {
                 answer.add(names.get(i));
             }
         }
