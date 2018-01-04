@@ -176,7 +176,24 @@ public class Main {
         System.out.println("The latest date is " + latest);
         System.out.println("The range of absence dates is " + range);
 
+        //what are the indexes of students who have [x] absence date
 
+        LocalDate studentDate = dates.get(0);
+        ArrayList<Integer> indexes = dateIndexes(dates, studentDate);
+        System.out.println("\nThe date to compare is " + studentDate);
+        System.out.println("The indexes of student with absence date " + studentDate + " are " + indexes + "\n");
+
+
+    }
+
+    private static ArrayList<Integer> dateIndexes(ArrayList<LocalDate> dates, LocalDate studentDate) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i < dates.size(); i++) {
+            if (dates.get(i) == studentDate) {
+                indexes.add(i);
+            }
+        }
+        return indexes;
     }
 
     private static LocalDate earliestDate(ArrayList<LocalDate> dates) {
