@@ -157,7 +157,7 @@ public class Main {
         //names of the students who have the longest number of days since last absence
         names = listOfStrings;
         dates = dates;
-        LocalDate earliestDate = earliestDate(dates);
+        LocalDate earliestDate = latestDate(dates);
         ArrayList<String> answernames = earliestDateName(names, earliestDate, dates);
 
         System.out.println("\nThe names are " + names);
@@ -167,10 +167,39 @@ public class Main {
         System.out.println("The student with the longest time since a absence is " + answernames);
         System.out.println("The names of the students with the longest number of days since last absence was : " + answernames + "\n");
 
+        //difference between the earliest and the latest date
+
+        LocalDate earliest = earliestDate(dates);
+        LocalDate latest = latestDate(dates);
+        long range = dateRange(earliest, latest);
+        System.out.println("The earliest date is " + earliest);
+        System.out.println("The latest date is " + latest);
+        System.out.println("The range of absence dates is " + range);
+
 
     }
 
     private static LocalDate earliestDate(ArrayList<LocalDate> dates) {
+        LocalDate latestDate = dates.get(0);
+        for (int i = 0; i < dates.size(); i++) {
+            if (latestDate.compareTo(dates.get(i)) > 0) {
+                latestDate = dates.get(i);
+            }
+
+        }
+        return latestDate;
+    }
+
+
+    private static long dateRange(LocalDate earliestDate, LocalDate latestDate) {
+        long earliest = earliestDate.toEpochDay();
+        long latest = latestDate.toEpochDay();
+        long answer = latest - earliest;
+        return answer;
+    }
+
+
+    private static LocalDate latestDate(ArrayList<LocalDate> dates) {
         LocalDate longestDate = dates.get(0);
         for (int i = 0; i < dates.size(); i++) {
             if (longestDate.compareTo(dates.get(i)) < 0) {
