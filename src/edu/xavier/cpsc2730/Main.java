@@ -14,6 +14,7 @@ public class Main {
     final static int FE = 7;
     final static int X = 8;
     final static int Y = 4;
+    final static int dateRange = 21;
 
     final static Random rand = new Random();
 
@@ -153,7 +154,44 @@ public class Main {
         ArrayList<String> answer = minAbsenceNames(absences, nameList);
         System.out.println("\nThe student with the lowest num of absences is " + answer);
 
+        //names of the students who have the longest number of days since last absence
+        names = listOfStrings;
+        dates = dates;
+        int intLongestSinceAbsence = intLongestSinceAbsence(dates, currentDate);
+        ArrayList<String> answernames = nameLongestSinceAbsence(names, intLongestSinceAbsence, dates);
 
+        System.out.println("The names are " + names);
+        System.out.println("The dates are " + dates);
+        System.out.println("The current date is " + currentDate);
+        System.out.println(intLongestSinceAbsence);
+        System.out.println(answernames);
+        System.out.println("The names of the students with the longest number of days since last absence were : " + answernames);
+
+
+    }
+
+    private static int intLongestSinceAbsence(ArrayList<LocalDate> dates, LocalDate currentDate) {
+        LocalDate longestDate = dates.get(0);
+        for (int i = 0; i < dates.size(); i++) {
+            if (longestDate.compareTo(dates.get(i)) > 0) {
+                longestDate = dates.get(i);
+            }
+
+        }
+        int answer = longestDate.compareTo(currentDate);
+        return answer;
+    }
+
+    private static ArrayList<String> nameLongestSinceAbsence(ArrayList<String> names, int intLongestSinceAbsence, ArrayList<LocalDate> dates) {
+        ArrayList<String> answer = new ArrayList<>();
+        LocalDate longestDate = dates.get(0);
+        LocalDate currentDate = LocalDate.now();
+        for (int i = 0; i < dates.size(); i++) {
+            if (intLongestSinceAbsence == dates.get(i).compareTo(currentDate)) {
+                answer.add(names.get(i));
+            }
+        }
+        return answer;
     }
 
     private static void table(ArrayList<String> nameList, ArrayList<LocalDate> dates, ArrayList<Integer> attended) {
@@ -191,7 +229,7 @@ public class Main {
         Random random = new Random();
         ArrayList<LocalDate> answer = new ArrayList<>();
         for (int i = 0; i < nameList.size(); i++) {
-            answer.add(currentDate.minusDays(random.nextLong() % 21)); // TODO Why should 21 be a parameter?
+            answer.add(currentDate.minusDays(random.nextLong() % dateRange));
         }
         return answer;
     }
