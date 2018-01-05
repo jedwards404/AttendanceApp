@@ -183,7 +183,57 @@ public class Main {
         System.out.println("\nThe date to compare is " + studentDate);
         System.out.println("The indexes of student with absence date " + studentDate + " are " + indexes + "\n");
 
+        //what are the indexes of students with each absence date?
 
+        ArrayList<LocalDate> keys = new ArrayList<>();
+        ArrayList<Integer> absenceIndex = new ArrayList<>();
+        Map<LocalDate, ArrayList<Integer>> dateMap = absenceDate(dates, attended);
+        System.out.println("The indexes of students with each absence date are:  \n" + dateMap + "\n");
+
+        //what are the indexes of students with the same absence date?
+        Map<LocalDate, Integer> sameDateMap = sameAbsenceDate(dates);
+        System.out.println("The count of indexes of students with the same date are : \n" + sameDateMap + "\n");
+
+        //
+        Record xavier = new Record();
+        LocalDate date = LocalDate.now();
+        System.out.println(xavier);
+        System.out.println("today is " + date);
+
+    }
+
+    private static Map<LocalDate, ArrayList<Integer>> absenceDate(ArrayList<LocalDate> dates, ArrayList<Integer> attended) {
+        Map<LocalDate, ArrayList<Integer>> answer = new HashMap<>();
+
+        for (int i = 0; i < dates.size(); i++) {
+
+            if (answer.containsKey(dates.get(i))) {
+                answer.get(dates.get(i)).add(i);
+            } else {
+                ArrayList<Integer> intial = new ArrayList<>();
+                intial.add(i);
+                answer.put(dates.get(i), intial);
+            }
+        }
+
+
+        return answer;
+    }
+
+    private static Map<LocalDate, Integer> sameAbsenceDate(ArrayList<LocalDate> dates) {
+        Map<LocalDate, Integer> answer = new HashMap<>();
+
+        for (int i = 0; i < dates.size(); i++) {
+
+            if (answer.containsKey(dates.get(i))) {
+                answer.put(dates.get(i), answer.get(dates.get(i)) + 1);
+            } else {
+                answer.put(dates.get(i), 1);
+            }
+        }
+
+
+        return answer;
     }
 
     private static ArrayList<Integer> dateIndexes(ArrayList<LocalDate> dates, LocalDate studentDate) {
