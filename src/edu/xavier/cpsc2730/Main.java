@@ -194,13 +194,40 @@ public class Main {
         Map<LocalDate, Integer> sameDateMap = sameAbsenceDate(dates);
         System.out.println("The count of indexes of students with the same date are : \n" + sameDateMap + "\n");
 
-        //
+        // rename Record
         Record xavier = new Record();
         LocalDate date = LocalDate.now();
         System.out.println(xavier);
         System.out.println("today is " + date);
 
+        //first parameterize constructor
+        Record UNO = new Record("Andrea", 10, LocalDate.now());
+        System.out.println("the parametrized constructor has " + UNO);
+
+        //second parameterized constructor
+        Record second = new Record("Torin", 20, LocalDate.of(2012, Month.FEBRUARY, 5));
+        System.out.println("the second parametrized constructor has " + second);
+
+        //third parameterized constructor
+        Record third = new Record("James", 30, LocalDate.of(1999, Month.JULY, 20));
+        System.out.println("the third parametrized constructor has " + third);
+
+
+        //method to change dates
+        System.out.println("\nThe original date is:\t" + date + "\n");
+        long changeDateBy = 10;
+        System.out.println("amount to change date by is:\t" + changeDateBy);
+        LocalDate alteredDate = xavier.dateChanger(date, changeDateBy);
+        System.out.println("The altered date is:\t" + alteredDate + "\n");
+
+        //change the number of absences to length of name
+
+        int xavierAbsences = xavier.getNumOfAbsences();
+        System.out.println("The original number of absences is:\t" + xavierAbsences);
+        int newAbsences = xavier.absenceChanger();
+        System.out.println("The new number of absences is " + newAbsences + "\n");
     }
+
 
     private static Map<LocalDate, ArrayList<Integer>> absenceDate(ArrayList<LocalDate> dates, ArrayList<Integer> attended) {
         Map<LocalDate, ArrayList<Integer>> answer = new HashMap<>();
