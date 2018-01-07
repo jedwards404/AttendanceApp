@@ -227,6 +227,53 @@ public class Main {
         System.out.println("The original number of absences is:\t" + xavierAbsences);
         int newAbsences = xavier.absenceChanger();
         System.out.println("The new number of absences is " + newAbsences + "\n");
+
+        //use Record Objects
+        ArrayList<Record> records = new ArrayList<>();
+        Record testRecord = new Record();
+        System.out.println("Here is the current Record class\t" + testRecord + "\n");
+        records.add(testRecord);
+
+        //Exchange name with third record
+        String oldName = xavier.getName();
+        System.out.println("the old name is " + oldName + "\n");
+        xavier.setName("John");
+        System.out.println("Here is the current Record with changed name\t" + xavier + "\n");
+
+
+        Record personalRecord = new Record("Joshua", 5, LocalDate.of(1996, Month.OCTOBER, 7));
+        System.out.println("my personal Record contains\t" + personalRecord + "\n");
+        records.add(personalRecord);
+
+        Record nonDefaultRecord = new Record("John", 20, LocalDate.of(2000, Month.JANUARY, 1));
+        System.out.println("The non default Record contains\t" + nonDefaultRecord + "\n");
+        records.add(nonDefaultRecord);
+
+        xavier.setName(oldName);
+        System.out.println("the non default Record with new name contains\t" + xavier + "\n");
+
+        //name of Record with least num of absences
+        ArrayList<String> answerName = nameLeastNumOfAbsences(records);
+        System.out.println("The record with the least num of absences is:\t" + answerName + "\n");
+
+
+    }
+
+    private static ArrayList<String> nameLeastNumOfAbsences(ArrayList<Record> records) {
+        ArrayList<String> answer = new ArrayList<>();
+        int minAbsences = records.get(0).getNumOfAbsences();
+        for (int i = 0; i < records.size(); i++) {
+            int numOfAbsences = records.get(i).getNumOfAbsences();
+            if (minAbsences > numOfAbsences) {
+                minAbsences = numOfAbsences;
+            }
+            if (minAbsences == numOfAbsences) {
+                answer.add(records.get(i).getName());
+            }
+
+        }
+
+        return answer;
     }
 
 

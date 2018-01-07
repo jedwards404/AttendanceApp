@@ -1,7 +1,6 @@
 package edu.xavier.cpsc2730;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 /**
  * Created by joshua on 1/5/18.
@@ -17,11 +16,12 @@ public class Record {
         date = LocalDate.now();
     }
 
-    public Record(String n, int numOfAbsences, LocalDate date) {
-        name = n;
+    public Record(String name, int numOfAbsences, LocalDate date) {
+        this.name = name;
         this.numOfAbsences = numOfAbsences;
-        this.date = LocalDate.now();
+        this.date = date;
     }
+
 
     @Override
     public String toString() {
@@ -38,6 +38,33 @@ public class Record {
     public int getNumOfAbsences() {
         int answer = this.numOfAbsences;
         return answer;
+    }
+
+    //get name
+    public String getName() {
+        String answer = this.name;
+        return answer;
+    }
+
+    //get date
+    public LocalDate getLocalDate() {
+        LocalDate answer = this.date;
+        return answer;
+    }
+
+    //set name
+    public void setName(String newName) {
+        this.name = newName;
+    }
+
+    //set date
+    public void setDate(LocalDate newDate) {
+        this.date = newDate;
+    }
+
+    //set num of absences
+    public void setNumOfAbsences(int newNumOfAbsences) {
+        this.numOfAbsences = newNumOfAbsences;
     }
 
 
