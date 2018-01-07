@@ -253,10 +253,29 @@ public class Main {
         System.out.println("the non default Record with new name contains\t" + xavier + "\n");
 
         //name of Record with least num of absences
-        ArrayList<String> answerName = nameLeastNumOfAbsences(records);
-        System.out.println("The record with the least num of absences is:\t" + answerName + "\n");
+        ArrayList<String> leastAbsenceName = nameLeastNumOfAbsences(records);
+        System.out.println("The record with the least num of absences is:\t" + leastAbsenceName + "\n");
+
+        //name of the youngest Record
+        ArrayList<String> youngestRecordName = nameYoungestRecord(records);
+        System.out.println("The record with the youngest year is:\t" + youngestRecordName + "\n");
 
 
+    }
+
+    private static ArrayList<String> nameYoungestRecord(ArrayList<Record> records) {
+        ArrayList<String> answer = new ArrayList<>();
+        LocalDate youngestYear = records.get(0).getLocalDate();
+        for (int i = 0; i < records.size(); i++) {
+            LocalDate year = records.get(i).getLocalDate();
+            if (year.isBefore(youngestYear)) {
+                youngestYear = year;
+            }
+            if (year == youngestYear) {
+                answer.add(records.get(i).getName());
+            }
+        }
+        return answer;
     }
 
     private static ArrayList<String> nameLeastNumOfAbsences(ArrayList<Record> records) {
