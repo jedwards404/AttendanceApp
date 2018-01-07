@@ -271,9 +271,13 @@ public class Main {
             if (year.isBefore(youngestYear)) {
                 youngestYear = year;
             }
-            if (year == youngestYear) {
-                answer.add(records.get(i).getName());
+            for (int j = 0; j < records.size(); j++) {
+                year = records.get(j).getLocalDate();
+                if (year == youngestYear) {
+                    answer.add(records.get(j).getName());
+                }
             }
+
         }
         return answer;
     }
@@ -286,9 +290,12 @@ public class Main {
             if (minAbsences > numOfAbsences) {
                 minAbsences = numOfAbsences;
             }
-            if (minAbsences == numOfAbsences) {
-                answer.add(records.get(i).getName());
+            for (int j = 0; j < records.size(); j++) {
+                if (minAbsences == numOfAbsences) {
+                    answer.add(records.get(j).getName());
+                }
             }
+
 
         }
 
@@ -438,7 +445,6 @@ public class Main {
 
 
     private static int numOfCoursesFinder(ArrayList<String> buildListNames, String name) {
-        //todo numOfCoursesFinder() has an error
         int answer = 0;
         for (int i = 0; i < buildListNames.size(); i++) {
             if (buildListNames.contains(buildListNames.get(i)) == buildListNames.contains(name)) {
