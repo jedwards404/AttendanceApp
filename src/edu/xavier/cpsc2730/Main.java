@@ -1,6 +1,8 @@
 package edu.xavier.cpsc2730;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -275,7 +277,29 @@ public class Main {
         ArrayList<Record> changedAbsences = addNumForEvenNumAbsences(recordsWithEvenAbsences, numOfAbsencesToAdd);
         System.out.println("when " + numOfAbsencesToAdd + " is added the records contain:\t" + changedAbsences + "\n");
 
+        //create attendance class
+        Attendance firstAttendance = new Attendance();
+        System.out.println("Here is the current attendance class:\t" + firstAttendance + "\n");
 
+        //create input file
+
+
+    }
+
+    private static File createInputFile() {
+        File inputFile = new File("C://AttendanceApp//inputFile");
+        try {
+
+            //create a temp file
+            File temp = File.createTempFile("tempfile", ".tmp");
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return inputFile;
     }
 
     private static ArrayList<Record> recordsWithEvenAbsences(ArrayList<Record> records) {
