@@ -261,14 +261,45 @@ public class Main {
         System.out.println("The record with the youngest year is:\t" + youngestRecordName + "\n");
 
         //make the second record's num of absences the sum of the other two's num of absences
-
         System.out.println(records + "\n");
         System.out.println("The second Record's current num of absences is " + records.get(1).getNumOfAbsences() + "\n");
         int newNumAbsences = sumNumOfAbsences(records);
         personalRecord.setNumOfAbsences(newNumAbsences);
         System.out.println("The new sum of absences for the second record is:\t" + personalRecord.getNumOfAbsences() + "\n");
 
+        //add one to the num of absences for every record that has a even num of absences
+        System.out.println(records + "\n");
+        int numOfAbsencesToAdd = 1;
+        ArrayList<Record> recordsWithEvenAbsences = recordsWithEvenAbsences(records);
+        System.out.println("The records with even absences contain:\t" + recordsWithEvenAbsences + "\n");
+        ArrayList<Record> changedAbsences = addNumForEvenNumAbsences(recordsWithEvenAbsences, numOfAbsencesToAdd);
+        System.out.println("when " + numOfAbsencesToAdd + " is added the records contain:\t" + changedAbsences + "\n");
 
+
+    }
+
+    private static ArrayList<Record> recordsWithEvenAbsences(ArrayList<Record> records) {
+        ArrayList<Record> recordsWithEvenAbsences = new ArrayList<>();
+        ArrayList<Integer> numOfAbsences = new ArrayList<>();
+        for (int i = 0; i < records.size(); i++) {
+            numOfAbsences.add(records.get(i).getNumOfAbsences());
+        }
+        for (int i = 0; i < records.size(); i++) {
+            if (numOfAbsences.get(i) % 2 == 0) {
+                recordsWithEvenAbsences.add(records.get(i));
+            }
+        }
+        return recordsWithEvenAbsences;
+    }
+
+    private static ArrayList<Record> addNumForEvenNumAbsences(ArrayList<Record> recordsWithEvenAbsences, int numOfAbsencesToAdd) {
+        int numToAdd = numOfAbsencesToAdd;
+        ArrayList<Record> changedRecordsNumAbsences = recordsWithEvenAbsences;
+        for (int i = 0; i < recordsWithEvenAbsences.size(); i++) {
+            int absences = recordsWithEvenAbsences.get(i).getNumOfAbsences();
+            changedRecordsNumAbsences.get(i).setNumOfAbsences(absences + numToAdd);
+        }
+        return changedRecordsNumAbsences;
     }
 
     private static int sumNumOfAbsences(ArrayList<Record> records) {
