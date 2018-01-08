@@ -260,7 +260,20 @@ public class Main {
         ArrayList<String> youngestRecordName = nameYoungestRecord(records);
         System.out.println("The record with the youngest year is:\t" + youngestRecordName + "\n");
 
+        //make the second record's num of absences the sum of the other two's num of absences
 
+        System.out.println(records + "\n");
+        System.out.println("The second Record's current num of absences is " + records.get(1).getNumOfAbsences() + "\n");
+        int newNumAbsences = sumNumOfAbsences(records);
+        personalRecord.setNumOfAbsences(newNumAbsences);
+        System.out.println("The new sum of absences for the second record is:\t" + personalRecord.getNumOfAbsences() + "\n");
+
+
+    }
+
+    private static int sumNumOfAbsences(ArrayList<Record> records) {
+        int newNumOfAbsences = records.get(0).getNumOfAbsences() + records.get(2).getNumOfAbsences();
+        return newNumOfAbsences;
     }
 
     private static ArrayList<String> nameYoungestRecord(ArrayList<Record> records) {
