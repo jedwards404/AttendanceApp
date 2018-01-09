@@ -2,7 +2,9 @@ package edu.xavier.cpsc2730;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -20,7 +22,7 @@ public class Main {
 
     final static Random rand = new Random();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         int sprintNum = 1;
 
@@ -249,7 +251,7 @@ public class Main {
         namesToSwap.add(1);
         namesToSwap.add(3);
         ArrayList<Record> swappedList = new ArrayList<>();
-        swappedList = swapName(records, namesToSwap);
+//        swappedList = swapName(records, namesToSwap);
         System.out.println("Records after names are swapped contains:\t" + swappedList + "\n");
 
 
@@ -292,43 +294,51 @@ public class Main {
         System.out.println("Here is the current attendance class:\t" + firstAttendance + "\n");
 
         //create input file
+        String inputFileName = "Joshua.txt";
+        createInputFile(inputFileName);
 
 
     }
 
-    private static ArrayList<Record> swapName(ArrayList<Record> records, ArrayList<Integer> namesToSwap) {
-        ArrayList<Record> swappedList = new ArrayList<>();
-        swappedList = records;
-        ArrayList<String> nameHolder = new ArrayList<>();
-        nameHolder.add(swappedList.get(namesToSwap.get(1)).getName());
-        nameHolder.add(swappedList.get(namesToSwap.get(2)).getName());
-        for (int i = 0; i < swappedList.size(); i++) {
-            if (nameHolder.get(1) == swappedList.get(1).getName()) {
-                swappedList.get(i).setName(nameHolder.get(2));
+//    private static ArrayList<Record> swapName(ArrayList<Record> records, ArrayList<Integer> namesToSwap) {
+//        ArrayList<Record> swappedList = new ArrayList<>();
+//        swappedList = records;
+//        ArrayList<String> nameHolder = new ArrayList<>();
+//        nameHolder.add(swappedList.get(namesToSwap.get(1)).getName());
+//        nameHolder.add(swappedList.get(namesToSwap.get(2)).getName());
+//        for (int i = 0; i < swappedList.size(); i++) {
+//            if (nameHolder.get(1) == swappedList.get(1).getName()) {
+//                swappedList.get(i).setName(nameHolder.get(2));
+//            }
+//        }
+//        for (int i = 0; i < swappedList.size(); i++) {
+//            if (nameHolder.get(2) == swappedList.get(3).getName()) {
+//                swappedList.get(i).setName(nameHolder.get(1));
+//            }
+//        }
+//        return swappedList;
+//    }
+
+
+    private static void createInputFile(String inputFileName) throws FileNotFoundException {
+        File test = new File(inputFileName);
+        if (!test.exists()) {
+            try (PrintWriter outputFile = new PrintWriter(test)) {
+
+                Random random = new Random();
+
+                for (int i = 0; i < 10; i++) {
+                    int rand = random.nextInt(11);
+                    outputFile.println(rand);
+                    System.out.println(rand);
+
+                }
             }
-        }
-        for (int i = 0; i < swappedList.size(); i++) {
-            if (nameHolder.get(2) == swappedList.get(3).getName()) {
-                swappedList.get(i).setName(nameHolder.get(1));
-            }
-        }
-        return swappedList;
-    }
-
-    private static File createInputFile() {
-        File inputFile = new File("C://AttendanceApp//inputFile");
-        try {
-
-            //create a temp file
-            File temp = File.createTempFile("tempfile", ".tmp");
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
+        } else {
+            System.out.println("new file not made");
         }
 
-        return inputFile;
+        //outputFile.close();
     }
 
     private static ArrayList<Record> recordsWithEvenAbsences(ArrayList<Record> records) {
@@ -345,7 +355,8 @@ public class Main {
         return recordsWithEvenAbsences;
     }
 
-    private static ArrayList<Record> addNumForEvenNumAbsences(ArrayList<Record> recordsWithEvenAbsences, int numOfAbsencesToAdd) {
+    private static ArrayList<Record> addNumForEvenNumAbsences(ArrayList<Record> recordsWithEvenAbsences,
+                                                              int numOfAbsencesToAdd) {
         int numToAdd = numOfAbsencesToAdd;
         ArrayList<Record> changedRecordsNumAbsences = new ArrayList<>();
         changedRecordsNumAbsences = recordsWithEvenAbsences;
