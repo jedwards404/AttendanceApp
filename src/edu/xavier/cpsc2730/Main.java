@@ -318,7 +318,8 @@ public class Main {
 
     private static ArrayList<Record> addNumForEvenNumAbsences(ArrayList<Record> recordsWithEvenAbsences, int numOfAbsencesToAdd) {
         int numToAdd = numOfAbsencesToAdd;
-        ArrayList<Record> changedRecordsNumAbsences = recordsWithEvenAbsences;
+        ArrayList<Record> changedRecordsNumAbsences = new ArrayList<>();
+        changedRecordsNumAbsences = recordsWithEvenAbsences;
         for (int i = 0; i < recordsWithEvenAbsences.size(); i++) {
             int absences = recordsWithEvenAbsences.get(i).getNumOfAbsences();
             changedRecordsNumAbsences.get(i).setNumOfAbsences(absences + numToAdd);
@@ -339,13 +340,15 @@ public class Main {
             if (year.isBefore(youngestYear)) {
                 youngestYear = year;
             }
-            for (int j = 0; j < records.size(); j++) {
-                year = records.get(j).getLocalDate();
-                if (year == youngestYear) {
-                    answer.add(records.get(j).getName());
-                }
-            }
 
+
+        }
+        for (int j = 0; j < records.size(); j++) {
+            LocalDate year = records.get(j).getLocalDate();
+            year = records.get(j).getLocalDate();
+            if (year == youngestYear) {
+                answer.add(records.get(j).getName());
+            }
         }
         return answer;
     }
@@ -358,13 +361,12 @@ public class Main {
             if (minAbsences > numOfAbsences) {
                 minAbsences = numOfAbsences;
             }
-            for (int j = 0; j < records.size(); j++) {
-                if (minAbsences == numOfAbsences) {
-                    answer.add(records.get(j).getName());
-                }
+        }
+        for (int j = 0; j < records.size(); j++) {
+            int numOfAbsences = records.get(0).getNumOfAbsences();
+            if (minAbsences == numOfAbsences) {
+                answer.add(records.get(j).getName());
             }
-
-
         }
 
         return answer;

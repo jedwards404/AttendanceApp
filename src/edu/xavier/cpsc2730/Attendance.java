@@ -11,7 +11,9 @@ public class Attendance {
     private ArrayList<Record> records;
 
     public Attendance() {
-        records = records;
+
+        ArrayList<Record> records = new ArrayList<>();
+        records = this.records;
     }
 
     public Attendance(ArrayList<Record> records) {
@@ -32,8 +34,10 @@ public class Attendance {
     }
 
     //get num of absences
-    public ArrayList<Integer> getNumOfAbsences(ArrayList<Record> records) {
+    public ArrayList<Integer> getNumOfAbsences() {
         ArrayList<Integer> answer = new ArrayList<>();
+        ArrayList<Record> records = new ArrayList<>();
+        records = this.records;
         for (int i = 0; i < records.size(); i++) {
             int numOfAbsences = records.get(i).getNumOfAbsences();
             answer.add(numOfAbsences);
