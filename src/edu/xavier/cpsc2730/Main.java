@@ -242,6 +242,16 @@ public class Main {
         xavier.setName("John");
         System.out.println("Here is the current Record with changed name\t" + xavier + "\n");
 
+        //Exchange names of first and third element using swapName()
+        String oldName2 = xavier.getName();
+        System.out.println("the old name is:\t" + oldName2 + "\n");
+        ArrayList<Integer> namesToSwap = new ArrayList<>();
+        namesToSwap.add(1);
+        namesToSwap.add(3);
+        ArrayList<Record> swappedList = new ArrayList<>();
+        swappedList = swapName(records, namesToSwap);
+        System.out.println("Records after names are swapped contains:\t" + swappedList + "\n");
+
 
         Record personalRecord = new Record("Joshua", 5, LocalDate.of(1996, Month.OCTOBER, 7));
         System.out.println("my personal Record contains\t" + personalRecord + "\n");
@@ -284,6 +294,25 @@ public class Main {
         //create input file
 
 
+    }
+
+    private static ArrayList<Record> swapName(ArrayList<Record> records, ArrayList<Integer> namesToSwap) {
+        ArrayList<Record> swappedList = new ArrayList<>();
+        swappedList = records;
+        ArrayList<String> nameHolder = new ArrayList<>();
+        nameHolder.add(swappedList.get(namesToSwap.get(1)).getName());
+        nameHolder.add(swappedList.get(namesToSwap.get(2)).getName());
+        for (int i = 0; i < swappedList.size(); i++) {
+            if (nameHolder.get(1) == swappedList.get(1).getName()) {
+                swappedList.get(i).setName(nameHolder.get(2));
+            }
+        }
+        for (int i = 0; i < swappedList.size(); i++) {
+            if (nameHolder.get(2) == swappedList.get(3).getName()) {
+                swappedList.get(i).setName(nameHolder.get(1));
+            }
+        }
+        return swappedList;
     }
 
     private static File createInputFile() {

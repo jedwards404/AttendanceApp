@@ -8,12 +8,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Attendance {
-    private ArrayList<Record> records;
+    private ArrayList<Record> records = new ArrayList<>();
 
     public Attendance() {
 
         ArrayList<Record> records = new ArrayList<>();
-        records = this.records;
     }
 
     public Attendance(ArrayList<Record> records) {
@@ -36,10 +35,8 @@ public class Attendance {
     //get num of absences
     public ArrayList<Integer> getNumOfAbsences() {
         ArrayList<Integer> answer = new ArrayList<>();
-        ArrayList<Record> records = new ArrayList<>();
-        records = this.records;
-        for (int i = 0; i < records.size(); i++) {
-            int numOfAbsences = records.get(i).getNumOfAbsences();
+        for (int i = 0; i < this.records.size(); i++) {
+            int numOfAbsences = this.records.get(i).getNumOfAbsences();
             answer.add(numOfAbsences);
         }
         return answer;
