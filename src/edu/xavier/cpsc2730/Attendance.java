@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Attendance {
     private ArrayList<Record> records = new ArrayList<>();
+    int FE = 7;
 
     public Attendance() {
 
@@ -47,6 +48,16 @@ public class Attendance {
         ArrayList<String> answer = new ArrayList<>();
         answer = this.getName();
         return answer;
+    }
+
+    public ArrayList<Integer> absencesMoreThan() {
+        ArrayList<Integer> absencesCalcHolder = new ArrayList<>();
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).getNumOfAbsences() < this.FE) {
+                absencesCalcHolder.add(records.get(i).getNumOfAbsences());
+            }
+        }
+        return absencesCalcHolder;
     }
 
 }
