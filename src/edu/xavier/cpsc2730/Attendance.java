@@ -42,5 +42,12 @@ public class Attendance {
         return answer;
     }
 
+    //get name
+    public ArrayList<String> getName() {
+        ArrayList<String> answer = new ArrayList<>();
+        answer = this.getName();
+        return answer;
+    }
+
 }
 

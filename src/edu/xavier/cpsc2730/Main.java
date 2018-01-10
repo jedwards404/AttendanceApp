@@ -290,34 +290,27 @@ public class Main {
         System.out.println("when " + numOfAbsencesToAdd + " is added the records contain:\t" + changedAbsences + "\n");
 
         //create attendance class
-        Attendance firstAttendance = new Attendance();
+        Attendance firstAttendance = new Attendance(records);
         System.out.println("Here is the current attendance class:\t" + firstAttendance + "\n");
 
         //create input file
         String inputFileName = "Joshua.txt";
         createInputFile(inputFileName);
 
+        //which students had more than [X] absences
+        int absenceConditionInt = X;
+        ArrayList<String> studentsMoreThanNumAbsences = new ArrayList<>();
+//        studentsMoreThanNumAbsences = absencesMoreThan(firstAttendance, X);
+//        System.out.println("The students with more than " + absenceConditionInt + " absences are:\t" + studentsMoreThanNumAbsences + "\n");
+
+        //names of students who FEd
+        ArrayList<String> studentsWhoFEd = new ArrayList<>();
+        System.out.println(firstAttendance);
+//        studentsWhoFEd = studentsWhoFEd(firstAttendance, FE);
+//        System.out.println("The names who FEd are:\t" + studentsWhoFEd + "\n");
+
 
     }
-
-//    private static ArrayList<Record> swapName(ArrayList<Record> records, ArrayList<Integer> namesToSwap) {
-//        ArrayList<Record> swappedList = new ArrayList<>();
-//        swappedList = records;
-//        ArrayList<String> nameHolder = new ArrayList<>();
-//        nameHolder.add(swappedList.get(namesToSwap.get(1)).getName());
-//        nameHolder.add(swappedList.get(namesToSwap.get(2)).getName());
-//        for (int i = 0; i < swappedList.size(); i++) {
-//            if (nameHolder.get(1) == swappedList.get(1).getName()) {
-//                swappedList.get(i).setName(nameHolder.get(2));
-//            }
-//        }
-//        for (int i = 0; i < swappedList.size(); i++) {
-//            if (nameHolder.get(2) == swappedList.get(3).getName()) {
-//                swappedList.get(i).setName(nameHolder.get(1));
-//            }
-//        }
-//        return swappedList;
-//    }
 
 
     private static void createInputFile(String inputFileName) throws FileNotFoundException {
@@ -340,6 +333,32 @@ public class Main {
 
         //outputFile.close();
     }
+
+//    private static ArrayList<String> studentsWhoFEd(Attendance firstAttendance, int FE) {
+//        ArrayList<String> answer = new ArrayList<>();
+//        String studentNames = firstAttendance.getName();
+//        ArrayList<Integer> absences = firstAttendance.getNumOfAbsences();
+//        for (int i = 0; i < absences.size(); i++) {
+//            if (absences.get(i) <= FE) {
+//                answer.add(studentNames);
+//            }
+//        }
+//        return answer;
+//    }
+
+
+//    private static ArrayList<String> absencesMoreThan(Attendance firstAttendance, int X) {
+//        ArrayList<String> answer = new ArrayList<>();
+//        String studentNames = firstAttendance.getName();
+//        ArrayList<Integer> absenceMoreThanHolder = new ArrayList<>();
+//        absenceMoreThanHolder = firstAttendance.getNumOfAbsences();
+//        for (int i = 0; i < absenceMoreThanHolder.size(); i++) {
+//            if (absenceMoreThanHolder.get(i) > X) {
+//                answer.add(studentNames);
+//            }
+//        }
+//        return answer;
+//    }
 
     private static ArrayList<Record> recordsWithEvenAbsences(ArrayList<Record> records) {
         ArrayList<Record> recordsWithEvenAbsences = new ArrayList<>();
