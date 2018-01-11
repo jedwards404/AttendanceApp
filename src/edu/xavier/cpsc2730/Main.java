@@ -297,18 +297,28 @@ public class Main {
         String inputFileName = "Joshua.txt";
         createInputFile(inputFileName);
 
+        System.out.println(firstAttendance.getNames());
+
         //which students had more than [X] absences
         int absenceConditionInt = X;
-        ArrayList<String> studentsMoreThanNumAbsences = new ArrayList<>();
-//        studentsMoreThanNumAbsences = absencesMoreThan(firstAttendance, X);
-//        System.out.println("The students with more than " + absenceConditionInt + " absences are:\t" + studentsMoreThanNumAbsences + "\n");
+        ArrayList<String> studentsMoreThanXNumAbsences = new ArrayList<>();
+        studentsMoreThanXNumAbsences = firstAttendance.studentsMoreThanXNumAbsences(absenceConditionInt);
+        System.out.println("The students with more than " + absenceConditionInt + " absences are:\t" + studentsMoreThanXNumAbsences + "\n");
 
         //names of students who FEd
         ArrayList<String> studentsWhoFEd = new ArrayList<>();
-        System.out.println(firstAttendance);
-//        studentsWhoFEd = studentsWhoFEd(firstAttendance, FE);
-//        System.out.println("The names who FEd are:\t" + studentsWhoFEd + "\n");
+        studentsWhoFEd = firstAttendance.studentsWhoFEd();
+        System.out.println("The names who FEd are:\t" + studentsWhoFEd + "\n");
 
+        //what percentage of students had perfect attendance
+        double percentPerfAttendees = firstAttendance.percentPerfectAttendees();
+        System.out.println("the percent of students with perfect attendance are:\t" + percentPerfAttendees + "\n");
+
+        //Which students had their last absence within [X] days of [Y] date?
+        long XDaysRange = 24;
+        LocalDate comparisonDate = LocalDate.of(2018, Month.JANUARY, 1);
+        ArrayList<String> studentsWithinRange = firstAttendance.dateRangeComparison(XDaysRange, comparisonDate);
+        System.out.println("The students with a absence " + XDaysRange + " days before or after " + comparisonDate + " are:\t" + studentsWithinRange);
 
     }
 
